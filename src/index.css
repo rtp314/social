@@ -1,7 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400&display=swap');
 
+html {
+  padding: 0;
+  margin: 0;
+}
+
 body {
   font-family: "Raleway";
+  padding: 0;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 2rem;
+  background: blue;
+}
+
+.feed {
+  width: 40%;
+}
+
+.sidebar {
+  width: 30%;
 }
 
 .login {
@@ -14,6 +37,8 @@ body {
 }
 
 .wrapper-center {
+  margin: 0;
+  height: 100%;
   display: flex;
   justify-content: center;
 }

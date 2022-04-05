@@ -1,31 +1,31 @@
 import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../libs/firebase_config";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 
 export default function Login(props) {
     const [email, setEmail] = useState("");
     const [pass, setPass] = useState("");
+    const navigate = useNavigate();
 
     function handleSubmit(event) {
         event.preventDefault();
         signInWithEmailAndPassword(auth, email, pass)
         .then((userCredential) => {
-            // Signed in 
             const user = userCredential.user;
             console.log(user)
-            // ...
+            navigate("/");
         })
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
             console.log(errorCode);
             console.log(errorMessage)
-            // ..
         });
     }
+
     return (
         <div className="wrapper-center">
             <div className="login">
