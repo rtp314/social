@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../libs/firebase_config";
+import { auth, db } from "../libs/firebase_config";
 import { useNavigate } from "react-router-dom";
+import { doc, setDoc } from "firebase/firestore";
 
 export default function Signup(props) {
     const [email, setEmail] = useState("");
@@ -15,7 +16,11 @@ export default function Signup(props) {
             // Signed in 
             const user = userCredential.user;
             console.log(user)
-            navigate("/")
+            setDoc(doc(db, "users", user.uid), {
+                email: user.email,
+                friends: [],
+            })
+            .then(navigate("/"))
             // ...
         })
         .catch((error) => {

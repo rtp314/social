@@ -43,3 +43,32 @@ body {
   justify-content: center;
 }
 
+.chatbox {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.chatbox > div {
+  padding: 0.1rem 0.5rem;
+}
+
+.chatbox > div > span {
+  color: rgba(0, 0, 0, 0.719);
+  font-size: 0.6rem;
+}
+
+.sentMsg {
+  background: rgb(108, 228, 108);
+  border-radius: 5px;
+  align-self: flex-start;
+}
+
+.receivedMsg {
+  background: rgb(124, 124, 228);
+  border-radius: 5px;
+  align-self: flex-end;
+  text-align: right;
+  width: auto;
+}
+
