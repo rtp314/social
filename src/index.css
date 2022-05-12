@@ -48,33 +48,32 @@ body {
   gap: 2rem;
 }
 
-.chatbox {
+.messagegroup {
   display: flex;
   flex-direction: column;
   gap: 5px;
+  padding: 0.5em;
 }
 
-.chatbox > div {
-  padding: 0.1rem 0.5rem;
-}
-
-.chatbox > div > span {
+.timestamp {
   color: rgba(0, 0, 0, 0.719);
   font-size: 0.6rem;
 }
 
-.sentMsg {
-  background: rgb(108, 228, 108);
+.msg {
   border-radius: 5px;
+  padding: 0.2em 0.5em;
+}
+
+.sentMsg {
+  background: rgba(108, 228, 108, 0.6);
   align-self: flex-start;
 }
 
 .receivedMsg {
-  background: rgb(124, 124, 228);
-  border-radius: 5px;
+  background: rgba(124, 124, 228, 0.6);
   align-self: flex-end;
   text-align: right;
-  width: auto;
 }
 
 .avatar {

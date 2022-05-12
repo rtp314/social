@@ -12,13 +12,23 @@ function App() {
 		<>
 			<div className="wrapper-center">
 				<div className="feed">
-				{loggedIn ? <><Writer/><Posts /></> : <><p>Content will be loaded here when logged in</p><Link to="/login">Log in</Link> or <Link to="/signup">sign up</Link></>}
-				<br/>
-				<Outlet />
-				{/* {loggedIn && JSON.stringify(auth)} */}
+					{loggedIn ? 
+						<>
+							<Writer/><Posts />
+						</> 
+						: 
+						<>
+							<p>Content will be loaded here when logged in</p>
+							<Link to="/login">Log in</Link> or <Link to="/signup">sign up</Link>
+						</>
+					}
+					<br/>
+					<Outlet />
+					{/* {loggedIn && JSON.stringify(auth)} */}
 				</div>
+				
 				<div className="sidebar">
-				{loggedIn && <Chat/>}
+					{loggedIn && <Chat/>}
 				</div>
 			</div>
 		</>

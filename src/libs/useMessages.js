@@ -40,6 +40,36 @@ function useMessages() {
         return cachedLookup.current;
     }
 
+    function sortMessagesByDate(msgArray) {
+        const sortedMessages = [[msgArray[0]]];
+        let sortedIndex = 0;
+        msgArray.forEach(msg => {
+            if (msg.day === sortedMessages[sortedIndex][0].day) {
+                sortedMessages[sortedIndex].push(msg)
+            } else {
+                sortedIndex++;
+                sortedMessages.push([msg])
+            }
+        })
+        return sortedMessages
+    }
+
+    function updateMsgList(msgArray) {
+        setMsgList(prev => {
+            if (prev.length < 1) {
+                return msgArray
+            };
+            if (msgArray[0][0].day === prev[prev.length - 1][0]?.day) {
+                const updatedMsgList = prev;
+                updatedMsgList[updatedMsgList.length - 1].push(...msgArray[0]);
+                updatedMsgList.push(...msgArray.slice(1))
+                return updatedMsgList
+            } else {
+                return [...prev, ...msgArray]
+            };
+        })
+    }
+
     useEffect(()=>{
         const q = query(collection(db, "messages"), orderBy("date", "asc"))
 
@@ -54,8 +84,10 @@ function useMessages() {
                 }
             });
             getUserNames(uidList.current) //returns email lookup object
-                .then(lookup => update.map(msg => {return {...msg, name: lookup[msg.uid]}}))
-                .then(formatted => setMsgList(prev => [...prev, ...formatted]));
+                //then use that lookup to add user names to messages, and add day
+                .then(lookup => update.map(msg => {return {...msg, name: lookup[msg.uid], day: msg.date.toDate().toDateString(), time: msg.date.toDate().toTimeString().slice(0,5)}}))
+                .then(msgArray => sortMessagesByDate(msgArray))
+                .then(formatted => updateMsgList(formatted))
         });
 
         return ()=>unsubscribe() //unsubscribe on unload

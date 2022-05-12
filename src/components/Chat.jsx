@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { auth, db } from "../libs/firebase_config";
 import { collection, addDoc, Timestamp, } from "firebase/firestore";
-import ChatMessage from "./ChatMessage";
 import useMessages from "../libs/useMessages";
+import MessageGroup from "./MessageGroup";
 
 
 export default function Chat() {
     const [newMsg, setNewMsg] = useState([]);
-    const newList = useMessages();
+    const msgList = useMessages();
     const [now, setNow] = useState(new Date());
     
     async function handleMessage(e) {
@@ -28,11 +28,11 @@ export default function Chat() {
 
     useEffect(()=>{
         document.getElementById("chatBottom").scrollIntoView({behavior: "smooth"})
-    }, [newList])
+    }, [msgList])
 
     return(
         <div className="chatbox">
-            {newList.length < 1 ? "Loading messages" : newList.map((msg, index)=><ChatMessage user={auth.currentUser.uid} msg={msg} key={index} now={now} />)}
+            {msgList.length < 1 ? "Loading messages" : msgList.map((msgGroup, index) => <MessageGroup user={auth.currentUser.uid} msgGroup={msgGroup} key={index} />)}
             <form onSubmit={handleMessage}>
                 <input type="text" value={newMsg} onChange={(e)=>setNewMsg(e.target.value)} placeholder="Type your message here" />
                 <button type="submit">Send</button>
