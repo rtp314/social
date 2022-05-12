@@ -13,7 +13,6 @@ root.render(
   <React.StrictMode>
 	  <Navbar />
 	  <br/>
-	  <br />
     <BrowserRouter>
     <Routes>
 		<Route path="/" element={<App />}>

@@ -44,11 +44,10 @@ function useMessages() {
         const q = query(collection(db, "messages"), orderBy("date", "asc"))
 
         const unsubscribe = onSnapshot(q, (snapshot)=> {
-            const update = snapshot.docChanges().map(change=> {
-                if (change.type === "added") {
-                    return change.doc.data()
-                }
-            });
+            const update = snapshot.docChanges()
+                .filter(change => change.type === "added")
+                .map(change => change.doc.data())
+            
             update.forEach(msg => {
                 if (!uidList.current.includes(msg.uid)) {
                     uidList.current.push(msg.uid);

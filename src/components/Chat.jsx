@@ -26,6 +26,10 @@ export default function Chat() {
         return ()=>clearInterval(interval)
     }, [])
 
+    useEffect(()=>{
+        document.getElementById("chatBottom").scrollIntoView({behavior: "smooth"})
+    }, [newList])
+
     return(
         <div className="chatbox">
             {newList.length < 1 ? "Loading messages" : newList.map((msg, index)=><ChatMessage user={auth.currentUser.uid} msg={msg} key={index} now={now} />)}
@@ -33,6 +37,7 @@ export default function Chat() {
                 <input type="text" value={newMsg} onChange={(e)=>setNewMsg(e.target.value)} placeholder="Type your message here" />
                 <button type="submit">Send</button>
             </form>
+            <div id="chatBottom"></div>
         </div>
     )
 }

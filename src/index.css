@@ -8,6 +8,7 @@ html {
 body {
   font-family: "Raleway";
   padding: 0;
+  background: rgb(230, 230, 230)
 }
 
 .navbar {
@@ -21,10 +22,13 @@ body {
 
 .feed {
   width: 40%;
+  background: white;
+  padding: 0.5rem;
 }
 
 .sidebar {
   width: 30%;
+  background: white;
 }
 
 .login {
@@ -41,6 +45,7 @@ body {
   height: 100%;
   display: flex;
   justify-content: center;
+  gap: 2rem;
 }
 
 .chatbox {
@@ -72,3 +77,36 @@ body {
   width: auto;
 }
 
+.avatar {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 1.3rem;
+}
+
+.avatar-image {
+  border-radius: 50%;
+   width: 3rem;
+   height: 3rem;
+   background: grey;
+}
+
+.post {
+  border: solid black 1px;
+  border-radius: 5px;
+  padding: 0.5rem;
+}
+
+.post-title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.post-body {
+  font-size: 1.5rem;
+  padding: 0.5rem 1rem;
+}
+
+.reactions {
+  text-align: right;
+  background: white;
+}
