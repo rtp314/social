@@ -162,3 +162,8 @@ body {
   background: var(--primary);
   color: white;
 }
+
+.btn-secondary {
+  background: var(--secondary);
+  color: white;
+}

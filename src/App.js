@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
-import Chat from "./components/Chat";
 import Posts from "./components/Posts";
+import Sidebar from "./components/Sidebar";
 import Writer from "./components/Writer";
 import useAuthStatus from "./libs/useAuthStatus";
 
@@ -28,7 +28,7 @@ function App() {
 				</div>
 				
 				<div className="sidebar">
-					{loggedIn && <Chat/>}
+					{loggedIn && <Sidebar/>}
 				</div>
 			</div>
 		</>
