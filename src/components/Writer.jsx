@@ -17,10 +17,10 @@ export default function Writer() {
     }
 
     return(
-        <div className="writer">
+        <div className="writer post">
             <form onSubmit={handleNewPost}>
                 <input type="text" placeholder="Write Something" value={newPost} onChange={e => setNewPost(e.target.value)} />
-                <button type="submit">Post</button>
+                <button className="button btn-primary" type="submit">Post</button>
             </form>
         </div>
     )
