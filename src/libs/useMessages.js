@@ -1,23 +1,26 @@
 import {useState, useEffect} from "react";
-import { doc, collection, query, onSnapshot, orderBy } from "firebase/firestore";
-
-//
+import { collection, query, onSnapshot, orderBy } from "firebase/firestore";
+import { db } from "./firebase_config";
 
 function useMessages({chatID}) {
-    const [msgList, setMsgList] = useState([]);
-    const [loading, setLoading] = useState(false)
+    const [msgList, setMsgList] = useState([[]]);
+    const [loading, setLoading] = useState(true)
+    console.log("message retrieval from: " + chatID)
 
     function sortMessagesByDate(msgArray) {
-        if (msgArray.length < 2) {
-            return msgArray
-        };
+        if (msgArray.length === 0) {
+            return [[]]
+        }
         const sortedMessages = [[msgArray[0]]];
-        let sortedIndex = 0;
-        msgArray.forEach(msg => {
-            if (msg.day === sortedMessages[sortedIndex][0].day) {
-                sortedMessages[sortedIndex].push(msg)
+        let dayIndex = 0;
+        msgArray.forEach((msg, index) => {
+            if (index === 0) { //skip the first one, it's already in the array
+                return
+            }
+            if (msg.day === sortedMessages[dayIndex][0].day) {
+                sortedMessages[dayIndex].push(msg)
             } else {
-                sortedIndex++;
+                dayIndex++;
                 sortedMessages.push([msg])
             }
         })
@@ -25,15 +28,16 @@ function useMessages({chatID}) {
     }
 
     function updateMsgList(msgArray) {
-        if (msgArray.length < 1) {
+        if (msgArray[0].length == 0) {
             return
         }
         setMsgList(prev => {
-            if (prev.length < 1) {
-                return msgArray
-            };
-            if (msgArray[0][0].day === prev[prev.length - 1][0]?.day) {
-                const updatedMsgList = prev;
+            console.log(prev)
+            if (prev[0][0] == undefined) {
+                return msgArray;
+            }
+            if (msgArray[0][0].day === prev[prev.length - 1][0].day) {
+                const updatedMsgList = [...prev];
                 updatedMsgList[updatedMsgList.length - 1].push(...msgArray[0]);
                 updatedMsgList.push(...msgArray.slice(1))
                 return updatedMsgList
@@ -45,16 +49,16 @@ function useMessages({chatID}) {
 
     useEffect(()=>{
         setLoading(true)
-        const q = query(collection(chatID, "messages"), orderBy("date", "asc"))
+        const q = query(collection(db, "chats", chatID, "messages"), orderBy("date", "asc"))
 
         const unsubscribe = onSnapshot(q, (snapshot)=> {
             const update = snapshot.docChanges()
                 .filter(change => change.type === "added")
-                .map(change => change.doc.data());
-
+                .map(change => change.doc.data())
+                .map(msg => {return {...msg, day: msg.date.toDate().toDateString(), time: msg.date.toDate().toTimeString().slice(0,5)}})
             updateMsgList(sortMessagesByDate(update));
             setLoading(false);
-        });
+        }, error => console.log(error));
 
         return ()=>unsubscribe() //unsubscribe on unload
     }, [])

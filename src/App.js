@@ -4,12 +4,13 @@ import Posts from "./components/Posts";
 import Sidebar from "./components/Sidebar";
 import Writer from "./components/Writer";
 import useAuthStatus from "./libs/useAuthStatus";
+import { FriendsContextProvider } from "./libs/FriendsContext";
 
 function App() {
-	const loggedIn = useAuthStatus();
+	const [loggedIn, myID] = useAuthStatus();
 
 	return (
-		<>
+		<FriendsContextProvider>
 			<div className="wrapper-center">
 				<div className="feed">
 					{loggedIn ? 
@@ -31,7 +32,7 @@ function App() {
 					{loggedIn && <Sidebar/>}
 				</div>
 			</div>
-		</>
+		</FriendsContextProvider>
     );
 }
 

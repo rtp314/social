@@ -6,14 +6,16 @@ import { auth } from "./firebase_config";
 
 export default function useAuthStatus() {
     const [loggedIn, setLoggedIn] = useState(false);
+    const [myID, setMyID] = useState("")
 
     onAuthStateChanged(auth, (user)=> {
         if (user) {
             setLoggedIn(true)
+            setMyID(user.uid)
         } else {
             setLoggedIn(false)
         }
     })
    
-    return loggedIn
+    return [loggedIn, myID]
 }

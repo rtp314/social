@@ -5,7 +5,7 @@ import MessageGroup from "./MessageGroup";
 import ChatWriter from "./ChatWriter";
 
 
-export default function Chat({chatID}) {
+export default function Chat({chatID, chatName}) {
     const [loading, msgList] = useMessages({chatID});
 
     useEffect(()=>{
@@ -14,9 +14,15 @@ export default function Chat({chatID}) {
 
     return(
         <div className="chatbox">
-            {loading ? "Loading messages" : msgList.map((msgGroup, index) => <MessageGroup user={auth.currentUser.uid} msgGroup={msgGroup} key={index} />)}
+            <span>Chat with {chatName}</span>
+            {loading ? 
+                "Loading messages" 
+            : 
+                msgList[0].length !== 0 && msgList.map((msgGroup, index) => <MessageGroup user={auth.currentUser.uid} msgGroup={msgGroup} key={index} />)
+            }
+
             <div id="chatBottom"></div>
-            <ChatWriter />
+            <ChatWriter chatID={chatID}/>
         </div>
     )
 }

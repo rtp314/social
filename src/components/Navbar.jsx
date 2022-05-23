@@ -1,10 +1,10 @@
 import React from "react";
-import useAuthStatus from "./libs/useAuthStatus";
+import useAuthStatus from "../libs/useAuthStatus";
 import { signOut } from "firebase/auth";
-import { auth } from "./libs/firebase_config";
+import { auth } from "../libs/firebase_config";
 
 export default function Navbar() {
-    const isLoggedIn = useAuthStatus()
+    const [isLoggedIn, myID] = useAuthStatus()
 
     function handleSignOut() {
 		signOut(auth)

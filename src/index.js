@@ -5,7 +5,7 @@ import App from './App';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
-import Navbar from './Navbar';
+import Navbar from './components/Navbar';
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 
