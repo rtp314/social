@@ -20,3 +20,29 @@ Goals:
 1111@gmail.com  nWfer1fBVTYsmn3xSTl5TpUgNr13
 4321@gmail.com  fx0DiCs3eMgGGljEVbIcL9Ewbkc2
 1234@gmail.com  NusVhLAhRYUpPO2lj3dIGDdwhcH3
+
+
+Data Schema:
+
+users (collection)
+    --user ID (current user)
+        --chats (subcollection)
+            --user ID (map)
+                --chat ID: [array of user IDs in chat]
+            --user ID (map)
+                --chat ID: [array of user IDs in chat]
+                --chat ID (second chat with multiple users)
+            ...
+            --(random ID) (map)
+                --chat_ID: {chat_ID}
+                --users: {array of users}
+
+chats (collection)
+    --chat ID (doc)
+        --messages (subcollection)
+            --message ID
+                --user
+                --message
+                --date
+            --message ID
+                ...
