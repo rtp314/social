@@ -1,46 +1,16 @@
-import {useState, useEffect, useRef} from "react";
-import { doc, collection, getDoc, query, onSnapshot, orderBy } from "firebase/firestore";
-import { db } from "./firebase_config";
+import {useState, useEffect} from "react";
+import { doc, collection, query, onSnapshot, orderBy } from "firebase/firestore";
 
 //
 
-function useMessages() {
+function useMessages({chatID}) {
     const [msgList, setMsgList] = useState([]);
-
-    const uidList = useRef([]);
-    const cachedUidList = useRef([]);
-    const cachedLookup = useRef({})
-
-
-    async function getUserNames(uid) { //right now, usernames are just email addresses
-        //all the following code is only useful in multi-user chats
-        if (uidList.current === cachedUidList.current) {
-            return cachedLookup.current
-        }
-
-        console.log("callback running")
-
-        //look up the unique uids, return an array of objects of type {uid, email}
-        const promises = [];
-        uidList.current.forEach(uid => {
-            if (!cachedUidList.current.includes(uid)) {
-                promises.push(new Promise(resolve => {
-                    const docRef = doc(db, "users", uid);
-                    resolve(getDoc(docRef));
-                    }).then(res=>res.data().email)
-                        .then(email=>{return {[uid]: email}}) //return {uid: email}
-                        .catch(error=>error)
-                );
-            }
-        })
-        const newEmails = await Promise.all(promises); // resolves to array: [{uid, email}, {uid, email}]
-
-        newEmails.forEach(pair => cachedLookup.current = {...cachedLookup.current, ...pair});
-        cachedUidList.current = uidList.current
-        return cachedLookup.current;
-    }
+    const [loading, setLoading] = useState(false)
 
     function sortMessagesByDate(msgArray) {
+        if (msgArray.length < 2) {
+            return msgArray
+        };
         const sortedMessages = [[msgArray[0]]];
         let sortedIndex = 0;
         msgArray.forEach(msg => {
@@ -55,6 +25,9 @@ function useMessages() {
     }
 
     function updateMsgList(msgArray) {
+        if (msgArray.length < 1) {
+            return
+        }
         setMsgList(prev => {
             if (prev.length < 1) {
                 return msgArray
@@ -71,29 +44,22 @@ function useMessages() {
     }
 
     useEffect(()=>{
-        const q = query(collection(db, "messages"), orderBy("date", "asc"))
+        setLoading(true)
+        const q = query(collection(chatID, "messages"), orderBy("date", "asc"))
 
         const unsubscribe = onSnapshot(q, (snapshot)=> {
             const update = snapshot.docChanges()
                 .filter(change => change.type === "added")
-                .map(change => change.doc.data())
-            
-            update.forEach(msg => {
-                if (!uidList.current.includes(msg.uid)) {
-                    uidList.current.push(msg.uid);
-                }
-            });
-            getUserNames(uidList.current) //returns email lookup object
-                //then use that lookup to add user names to messages, and add day
-                .then(lookup => update.map(msg => {return {...msg, name: lookup[msg.uid], day: msg.date.toDate().toDateString(), time: msg.date.toDate().toTimeString().slice(0,5)}}))
-                .then(msgArray => sortMessagesByDate(msgArray))
-                .then(formatted => updateMsgList(formatted))
+                .map(change => change.doc.data());
+
+            updateMsgList(sortMessagesByDate(update));
+            setLoading(false);
         });
 
         return ()=>unsubscribe() //unsubscribe on unload
     }, [])
 
-    return msgList
+    return [loading, msgList]
 }
 
 export default useMessages
