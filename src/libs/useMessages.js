@@ -1,11 +1,11 @@
-import {useState, useEffect} from "react";
+import {useState, useEffect, useRef} from "react";
 import { collection, query, onSnapshot, orderBy } from "firebase/firestore";
 import { db } from "./firebase_config";
 
 function useMessages({chatID}) {
     const [msgList, setMsgList] = useState([[]]);
     const [loading, setLoading] = useState(true)
-    console.log("message retrieval from: " + chatID)
+    const oldChatID = useRef()
 
     function sortMessagesByDate(msgArray) {
         if (msgArray.length === 0) {
@@ -48,6 +48,10 @@ function useMessages({chatID}) {
     }
 
     useEffect(()=>{
+        if (chatID !== oldChatID.current) {
+            setMsgList([[]])
+            oldChatID.current = chatID
+        }
         setLoading(true)
         const q = query(collection(db, "chats", chatID, "messages"), orderBy("date", "asc"))
 
@@ -61,7 +65,7 @@ function useMessages({chatID}) {
         }, error => console.log(error));
 
         return ()=>unsubscribe() //unsubscribe on unload
-    }, [])
+    }, [chatID])
 
     return [loading, msgList]
 }

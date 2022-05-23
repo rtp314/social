@@ -18,7 +18,6 @@ export default function Sidebar() {
         const q = query(collection(db, "users", myID, "chats"))
         const chatData = await getDocs(q);
         let chatList = [];
-        console.log("useEffect running")
 
         // chatData format: [{chat_id: xxx, users: [yy, zz]}, {...}]
         chatData.forEach(chat => {
@@ -28,8 +27,6 @@ export default function Sidebar() {
         })
         //chatList format: [{uid: chat_id}, {...}]
         setChats(chatList)
-        console.log("current list of chats: " + JSON.stringify(chats))
-        console.log("current friend list: " + JSON.stringify(friends))
     }
 
     async function startChat(uid) {
