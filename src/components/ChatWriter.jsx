@@ -17,9 +17,11 @@ export default function ChatWriter({chatID}) {
     }
 
     return (
-        <form onSubmit={handleMessage}>
-            <input type="text" value={newMsg} onChange={(e)=>setNewMsg(e.target.value)} placeholder="Type your message here" />
-            <button className="button primary" type="submit">Send</button>
-        </form>
+        <div className="chat-writer">
+            <form onSubmit={handleMessage}>
+                <input type="text" value={newMsg} onChange={(e)=>setNewMsg(e.target.value)} placeholder="Type your message here" />
+                <button className="button primary" type="submit">Send</button>
+            </form>
+        </div>
     )
 }

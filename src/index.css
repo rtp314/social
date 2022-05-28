@@ -113,6 +113,24 @@ li {
 
 /* MESSAGES */
 
+.chatbox {
+  position: fixed;
+  bottom: 0px;
+  right: 3rem;
+  padding: 0.5rem;
+  background: white;
+  border-radius: 0.5em;
+}
+
+.chat-messages {
+  max-height: 40vh;
+  overflow-y: scroll;
+}
+
+.chat-writer {
+  padding-top: 0.4rem;
+}
+
 .messagegroup {
   display: flex;
   flex-direction: column;

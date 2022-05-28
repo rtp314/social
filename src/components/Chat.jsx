@@ -15,13 +15,15 @@ export default function Chat({chatID, chatName}) {
     return(
         <div className="chatbox">
             <span>Chat with {chatName}</span>
-            {loading ? 
-                "Loading messages" 
-            : 
-                msgList[0].length !== 0 && msgList.map((msgGroup, index) => <MessageGroup user={auth.currentUser.uid} msgGroup={msgGroup} key={index} />)
-            }
+            <div className="chat-messages">
+                {loading ? 
+                    "Loading messages" 
+                : 
+                    msgList[0].length !== 0 && msgList.map((msgGroup, index) => <MessageGroup user={auth.currentUser.uid} msgGroup={msgGroup} key={index} />)
+                }
 
-            <div id="chatBottom"></div>
+                <div id="chatBottom"></div>
+            </div>
             <ChatWriter chatID={chatID}/>
         </div>
     )

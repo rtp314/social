@@ -20,7 +20,7 @@ export default function Writer() {
         <div className="writer post">
             <form onSubmit={handleNewPost}>
                 <input type="text" placeholder="Write Something" value={newPost} onChange={e => setNewPost(e.target.value)} />
-                <button className="button btn-primary" type="submit">Post</button>
+                <button className="button primary" type="submit">Post</button>
             </form>
         </div>
     )
