@@ -1,8 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400&display=swap');
 
 :root {
-  --primary: rgb(108, 108, 255);
-  --secondary: rgb(175, 175, 252);
+  --primary: #3954C0;
+  --secondary: #2995B4;
+  --light: #74C2D8;
+  --highlight: #4BD775;
   --danger: rgb(247, 122, 122);
 }
 
@@ -14,6 +16,7 @@ html {
 body {
   font-family: "Raleway";
   padding: 0;
+  margin-top: 1rem;
   background: rgb(230, 230, 230)
 }
 
@@ -22,8 +25,53 @@ body {
   top: 0;
   left: 0;
   width: 100vw;
+  height: 2.5rem;
+  background: var(--light);
+  color: white;
+  font-weight: bold;
+  box-shadow: 0px 2px 3px rgba(100,100,100,0.6);
+}
+
+.navbar div {
+  margin: 0 2rem;
+}
+
+#logo-img {
   height: 2rem;
-  background: var(--primary);
+  width: 2rem;
+}
+
+#gear-img {
+  height: 1.3rem;
+  width: 1.3rem;
+}
+
+ul {
+  padding: 0px;
+  margin: 0px;
+}
+
+li {
+  text-decoration: none;
+  margin: 0;
+  padding: 0.3em;
+  color: black;
+  list-style: none;
+  min-width: 8rem;
+  background-color: white;
+  border-bottom: var(--light) 1px solid;
+}
+
+.dropdown {
+  position: relative;
+}
+
+#user-menu {
+  position: absolute;
+  display: block;
+  left: -5rem;
+  border-radius: 0.5em;
+
 }
 
 .feed {

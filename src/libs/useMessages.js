@@ -28,12 +28,11 @@ function useMessages({chatID}) {
     }
 
     function updateMsgList(msgArray) {
-        if (msgArray[0].length == 0) {
+        if (msgArray[0].length === 0) {
             return
         }
         setMsgList(prev => {
-            console.log(prev)
-            if (prev[0][0] == undefined) {
+            if (prev[0][0] === undefined) {
                 return msgArray;
             }
             if (msgArray[0][0].day === prev[prev.length - 1][0].day) {

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg width="139.93mm" height="139.93mm" version="1.1" viewBox="0 0 139.93 139.93" xmlns="http://www.w3.org/2000/svg">
+ <g transform="translate(-38.553 -57.115)">
+  <circle cx="108.52" cy="127.08" r="69.966" fill="#2996b4" stroke-width="0"/>
+  <path d="m179.38 88.707h-69.966c-32.841 0-33.911 37.567 0 38.017 33.375 0.44338 33.734 38.017-0.17849 38.017h-77.641" fill="none" stroke="#fff" stroke-width="20"/>
+ </g>
+ <g transform="translate(-38.553 -57.115)" display="none" stroke="#000">
+  <g fill="none" stroke-width=".26458px">
+   <path d="m109.41 126.72h86.922"/>
+   <path d="m109.41 126.72v-62.648"/>
+   <path d="m109.41 126.72v60.864"/>
+  </g>
+  <g fill-opacity="0">
+   <ellipse cx="109.41" cy="126.72" rx="27.745" ry="26.695" opacity=".54167" stroke-width=".2"/>
+   <circle cx="109.41" cy="107.81" r="18.919" opacity=".54167"/>
+   <circle cx="109.41" cy="145.64" r="18.919" opacity=".54167" stroke-miterlimit="4.2"/>
+  </g>
+  <path d="m109.41 88.707h69.966" fill="none" stroke-width=".26458px"/>
+  <path d="m109.23 164.74h-69.788" fill="none" stroke-width=".26458px"/>
+ </g>
+</svg>

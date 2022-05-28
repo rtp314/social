@@ -32,7 +32,6 @@ export default function Sidebar() {
     async function startChat(uid) {
 
         const test = chats.find(chat => chat.hasOwnProperty(uid))
-        console.log("test = " + typeof test)
 
         if (test != undefined) {
 
