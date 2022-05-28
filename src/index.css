@@ -205,13 +205,3 @@ li {
   outline: none;
   border: none;
 }
-
-.btn-primary {
-  background: var(--primary);
-  color: white;
-}
-
-.btn-secondary {
-  background: var(--secondary);
-  color: white;
-}

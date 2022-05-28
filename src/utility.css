@@ -30,3 +30,13 @@
   margin-right: 0.5rem;
 }
 
+.primary {
+  background: var(--primary);
+  color: white;
+}
+
+.secondary {
+  background: var(--secondary);
+  color: white;
+}
+

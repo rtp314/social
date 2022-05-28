@@ -2,7 +2,7 @@ import { doc, collection, setDoc, query, getDocs } from "firebase/firestore";
 import React, {useEffect, useState} from "react";
 import { auth, db } from "../libs/firebase_config";
 import useAuthStatus from "../libs/useAuthStatus";
-import { useFriends } from "../libs/FriendsContext";
+import { useUserData } from "../libs/UserContext";
 import Chat from "./Chat";
 
 export default function Sidebar() {
@@ -11,7 +11,7 @@ export default function Sidebar() {
     const [chats, setChats] = useState([]);
     const [currentChatID, setCurrentChatID] = useState("")
     const [currentChatName, setCurrentChatName] = useState("")
-    const friends = useFriends()
+    const myData = useUserData()
 
     async function getChatList() {
         //get the chat list
@@ -37,7 +37,7 @@ export default function Sidebar() {
 
             console.log("found old chat");
             setCurrentChatID(test[uid]);
-            setCurrentChatName(friends[uid]);
+            setCurrentChatName(myData.friends[uid]);
             setOpenChat(true);
 
         } else {
@@ -58,7 +58,7 @@ export default function Sidebar() {
             
             setCurrentChatID(newChatID);
             setChats(prev => [...prev, {[uid]: newChatID}]);
-            setCurrentChatName(friends[uid]);
+            setCurrentChatName(myData.friends[uid]);
             setOpenChat(true);
 
         }
@@ -71,8 +71,9 @@ export default function Sidebar() {
     return (
         <>
         <div id="friends-list">
+            Friends:<br/>
             {/* {chats.map(chat=><p>{JSON.stringify(chat.users)}</p>)} */}
-            {Object.keys(friends).map((key, i) => <p key={i}>{friends[key]}<button className="button btn-secondary" onClick={()=>startChat(key)}>Chat</button></p>)}
+            {typeof myData.friends === "object" && Object.keys(myData.friends).map((key, i) => <p key={i}>{myData.friends[key]}<button className="button secondary" onClick={()=>startChat(key)}>Chat</button></p>)}
         </div>
         {openChat && <Chat chatID={currentChatID} chatName={currentChatName}/>}
         </>
