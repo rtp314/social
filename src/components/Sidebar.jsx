@@ -75,19 +75,19 @@ export default function Sidebar() {
     return (
         <>
             <div id="friends-list">
-                Friends:<br/>
+                <h3>Friends</h3>
                 {typeof myData.friends === "object" &&
                     Object.keys(myData.friends).map((uid, i) => { return (
                         <p key={i}>{myData.friends[uid]}
-                            <button className="button secondary" onClick={()=>startChat(uid)}>Chat</button>
+                            <button className="secondary" onClick={()=>startChat(uid)}>Chat</button>
                         </p>
                     )})
                 }
-                Chats:<br/>
+                <h3>Chats</h3>
                 {typeof myData.friends === "object" && chats.length > 0 && 
                     chats.map(chat => { return (
                         <p>{myData.friends[chat.uid]}
-                            <button className="button secondary" onClick={()=>openChat(chat)}>Chat</button>
+                            <button className="secondary" onClick={()=>openChat(chat)}>Chat</button>
                         </p>
                     )})
                 }
