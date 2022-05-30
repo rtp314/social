@@ -27,7 +27,7 @@ export default function Login(props) {
     }
 
     return (
-        <div className="wrapper-center">
+        <div className="feed">
             <div className="login">
                 <form onSubmit={handleSubmit}>
                     <h1>Log in here.</h1>
@@ -47,21 +47,20 @@ export default function Login(props) {
                         placeholder="Password" 
                     />
                     <br/>
-                    <button type="submit">Log In</button>
+                    <button className="primary" type="submit">Log In</button>
                 </form>
                 <p>No user? <Link to="/signup">Sign up here!</Link></p>
             </div>
             <div className="saved-users">
                 <p>Saved Accounts</p>
-                {savedUsers.map(user=><User user={user}/>)}
+                {savedUsers.map(user=><SavedUser user={user}/>)}
             </div>
         </div>
-        
         
     )
 }
 
-function User({user}) {
+function SavedUser({user}) {
     const navigate = useNavigate();
 
     function handleLogin() {
@@ -76,8 +75,8 @@ function User({user}) {
     }
 
     return (
-        <div className="saved-user" onClick={handleLogin}>
+        <button className="saved-user light" onClick={handleLogin}>
             {user.email}
-        </div>
+        </button>
     )
 }

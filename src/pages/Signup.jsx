@@ -31,7 +31,7 @@ export default function Signup(props) {
     }
 
     return (
-        <div className="wrapper-center">
+        <div className="feed">
             <div className="login">
                 <h1>Create New User</h1>
                 <form onSubmit={handleSubmit}>
@@ -51,7 +51,8 @@ export default function Signup(props) {
                         placeholder="Password" 
                     />
                     <br/>
-                    <button type="submit">Create User</button>
+                    <button className="button primary" type="submit">Create User</button>
+                    <button className="button light" type="button" onClick={()=>navigate("/login")}>Back to login</button>
                 </form>
             </div>
         </div>

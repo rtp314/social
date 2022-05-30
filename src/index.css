@@ -32,7 +32,7 @@ body {
   box-shadow: 0px 2px 3px rgba(100,100,100,0.6);
 }
 
-.navbar div {
+.navbar > div {
   margin: 0 2rem;
 }
 
@@ -44,6 +44,11 @@ body {
 #gear-img {
   height: 1.3rem;
   width: 1.3rem;
+  margin-top: 0.2rem;
+}
+
+.nav-spacer {
+  margin-bottom: 3rem;
 }
 
 ul {
@@ -104,7 +109,7 @@ li {
 }
 
 .wrapper-center {
-  margin: 0;
+  margin-top: 3rem;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -120,6 +125,7 @@ li {
   padding: 0.5rem;
   background: white;
   border-radius: 0.5em;
+  border: #eee solid 1px;
 }
 
 .chat-messages {
@@ -129,6 +135,16 @@ li {
 
 .chat-writer {
   padding-top: 0.4rem;
+}
+
+.chat-writer input {
+  outline: none;
+  border: none;
+  font-size: 1.1rem;
+}
+
+.chat-writer input::placeholder {
+  color:rgb(199, 199, 199);
 }
 
 .messagegroup {
@@ -215,11 +231,11 @@ li {
   background: white;
 }
 
-/* BUTTONS */
-
-.button {
+button {
   font-size: 1.2rem;
   border-radius: 0.2em;
   outline: none;
   border: none;
+  margin: 0.3em;
+  padding: 0.2em 0.5em;
 }

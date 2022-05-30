@@ -4,14 +4,12 @@ import Posts from "./components/Posts";
 import Sidebar from "./components/Sidebar";
 import Writer from "./components/Writer";
 import useAuthStatus from "./libs/useAuthStatus";
-import { UserContextProvider } from "./libs/UserContext";
 
 function App() {
 	const [loggedIn, myID] = useAuthStatus();
 
 	return (
-		<UserContextProvider>
-			<div className="wrapper-center">
+			<>
 				<div className="feed">
 					{loggedIn ? 
 						<>
@@ -24,15 +22,13 @@ function App() {
 						</>
 					}
 					<br/>
-					<Outlet />
 					{/* {loggedIn && JSON.stringify(auth)} */}
 				</div>
 				
 				<div className="sidebar">
 					{loggedIn && <Sidebar/>}
 				</div>
-			</div>
-		</UserContextProvider>
+			</>
     );
 }
 
