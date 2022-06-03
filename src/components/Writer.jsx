@@ -1,20 +1,34 @@
 import { addDoc, collection, Timestamp } from "firebase/firestore";
 import React, { useRef, useState } from "react";
-import { auth, db } from "../libs/firebase_config";
+import { auth, db, storage } from "../libs/firebase_config";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+
 
 export default function Writer() {
     const [newPost, setNewPost] = useState("");
+    const [images, setImages] = useState([]);
     const fileUpload = useRef();
+    const input = useRef();
 
     async function handleNewPost(e) {
-        e.preventDefault();
-        const input = document.getElementById("writer-input")
+        const uploadedImages = []
+        //first, upload images
+        for (let i=0; i<images.length; i++) {
+            const storageRef = ref(storage, `${auth.currentUser.uid}/${images[i].name}`)
+            console.log(images[i])
+            const snapshot = await uploadBytes(storageRef, images[i])
+            const url = await getDownloadURL(storageRef)
+            uploadedImages.push(url)
+        }
+
+        //second, upload post
         const msg = newPost;
         setNewPost("");
         await addDoc(collection(db, "posts"), {
             uid: auth.currentUser.uid,
-            body: input.innerHTML,
+            body: input.current.value,
             date: Timestamp.now(),
+            images: uploadedImages
         })
     }
 
@@ -34,12 +48,15 @@ export default function Writer() {
     }
 
     function handleFiles(files) {
-        const append = document.getElementById("writer-input");
+        console.log(files)
+        setImages(files)
+        const append = document.getElementById("post-writer");
         Array.from(files).forEach(file => {
             console.log(file)
             const img = document.createElement("img");
+            img.classList.add("post-img")
             img.file = file;
-            append.appendChild(img)
+            append.insertBefore(img, input.current)
             const reader = new FileReader();
             reader.onload = (e) => img.src = e.target.result;
             reader.readAsDataURL(file);
@@ -52,9 +69,9 @@ export default function Writer() {
     }
 
     return(
-        <div id="append" onDragOver={handleDragOver} onDrop={handleDrop} className="writer post">
-            <div id="writer-input" contentEditable="true">What's on your mind?</div>
-            <input type="file" ref={fileUpload} onChange={handleUpload} hidden/>
+        <div id="post-writer" onDragOver={handleDragOver} onDrop={handleDrop} className="writer post">
+            <input type="text" ref={input} className="input" placeholder="What's on your mind?" />
+            <input type="file" ref={fileUpload} onChange={handleUpload} accept="image/*" hidden/>
             <button className="button primary" onClick={handleNewPost} type="button">Post</button>
             <button className="light" type="button" onClick={()=>fileUpload.current.click()}>Add Image</button>
         </div>

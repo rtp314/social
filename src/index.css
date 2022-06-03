@@ -231,6 +231,10 @@ li {
   padding: 0.5rem 1rem;
 }
 
+.post-img {
+  width: 100%;
+}
+
 .reactions {
   text-align: right;
   background: white;

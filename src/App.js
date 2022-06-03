@@ -13,7 +13,8 @@ function App() {
 				<div className="feed">
 					{loggedIn ? 
 						<>
-							<Writer/><Posts />
+							<Writer/>
+							<Posts />
 						</> 
 						: 
 						<>
