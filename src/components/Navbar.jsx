@@ -57,7 +57,7 @@ export function UserMenu() {
     }, [])
 
     return (
-        <div id="dropdown" className="dropdown" onClick={()=>setShowMenu(prev=> prev ? false : true)} onFocusOut={()=>setShowMenu(false)}>
+        <div id="dropdown" className="dropdown" onClick={()=>setShowMenu(prev=> prev ? false : true)} onBlur={()=>setShowMenu(false)}>
             <img id="gear-img" alt="User settings" className="mx1" src={gear} />
             {showMenu && <div id="user-menu">
                 <ul>

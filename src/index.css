@@ -6,6 +6,7 @@
   --light: #74C2D8;
   --highlight: #4BD775;
   --danger: rgb(247, 122, 122);
+  --grey: rgb(230, 230, 230);
 }
 
 html {

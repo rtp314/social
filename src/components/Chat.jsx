@@ -17,7 +17,10 @@ export default function Chat({chatID, chatName, setOpenChatBox}) {
 
     return(
         <div className="chatbox">
-            <div onClick={()=>setShowChat(prev=>!prev)}>{chatName}</div>
+            <div className="space-between" onClick={()=>setShowChat(prev=>!prev)}>
+                <div>{chatName}</div>
+                {showChat && <div className="close" onClick={()=>setOpenChatBox(false)}>X</div>}
+            </div>
             {showChat && <>
                 <div className="chat-messages">
                     {loading ? 
