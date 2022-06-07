@@ -4,33 +4,32 @@ import { signOut } from "firebase/auth";
 import { auth } from "../libs/firebase_config";
 import logo from "../images/logo3.svg";
 import gear from "../images/gear-svgrepo-com.svg"
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet} from "react-router-dom";
 
 export default function Navbar() {
     const [isLoggedIn, myID] = useAuthStatus();
 
-    function handleSignOut() {
-		signOut(auth)
-		.then(()=>{
-			console.log("signed out")
-		});
-	}
+        function handleNav() {
+
+    }
 
     return (
         <>
-            <nav className="navbar flex-between">
-                <div className="align-center">
-                    <img id="logo-img" src={logo} alt="Social Logo" />
-                    <em className="mx1">Social</em>
-                </div>
-                <div className="align-center">
-                    <UserMenu />
-                    {isLoggedIn ? auth.currentUser.email : "not signed in"}
-                    <button className="button mx1" onClick={handleSignOut} type="button">Sign Out</button>
+            <nav className="navbar">
+                <div className="flex-between h100 m3x">
+                    <Link className="plain-link em" to="/">
+                        <div className="align-center" onClick={handleNav}>
+                            <img id="logo-img" src={logo} alt="Social Logo" />
+                            <span className="mx1">Social</span>
+                        </div>
+                    </Link>
+                    <div className="align-center">
+                        <UserMenu />
+                        {isLoggedIn ? auth.currentUser.email : "not signed in"}
+                    </div>
                 </div>
             </nav>
-            <div className="nav-spacer"></div>
-            <div className="wrapper-center">
+            <div className="main wrapper-center">
                 <Outlet />
             </div>
         </>
@@ -39,6 +38,13 @@ export default function Navbar() {
 
 export function UserMenu() {
     const [showMenu, setShowMenu] = useState(false);
+
+    function handleSignOut() {
+		signOut(auth)
+		.then(()=>{
+			console.log("signed out")
+		});
+	}
 
     useEffect(() => {
         const dropdown = document.getElementById("dropdown")
@@ -61,9 +67,9 @@ export function UserMenu() {
             <img id="gear-img" alt="User settings" className="mx1" src={gear} />
             {showMenu && <div id="user-menu">
                 <ul>
-                    <li><Link to="./User">Account Settings</Link></li>
+                    <li><Link className="plain-link" to="./User">Account Settings</Link></li>
                     <li>Add Friends</li>
-                    <li >Sign Out</li>
+                    <li onClick={handleSignOut}>Sign Out</li>
                 </ul>
             </div>}
         </div>

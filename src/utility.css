@@ -2,7 +2,6 @@
 
 .flex-between {
     display: flex;
-    width: 100%;
     flex-flow: row;
     justify-content: space-between;
     align-items: center;
@@ -25,6 +24,11 @@
   margin: 1rem;
 }
 
+.m3x {
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
 .mx1 {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
@@ -32,6 +36,10 @@
 
 .p1 {
   padding: 0.4em 0.4em;
+}
+
+.h100 {
+  height: 100%;
 }
 
 .primary {
@@ -64,6 +72,11 @@
   border: solid 1px rgb(192, 192, 192);
 }
 
+.highlight:hover {
+  background-color: var(--primary);
+  color: white;
+}
+
 .modal {
   border: none;
   border-radius: 1em;
@@ -85,4 +98,14 @@ h3 {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+}
+
+.em {
+  font-style: italic;
+}
+
+.plain-link {
+  color: currentColor;
+  text-decoration: none;
+  cursor: default;
 }

@@ -3,14 +3,16 @@ import Avatar from "./Avatar";
 import Reactions from "./Reactions";
 import { getTimestamp } from "../libs/utils";
 import { getDownloadURL } from "firebase/storage";
+import { useUserData } from "../libs/UserContext";
 
 export default function Post({post, now}) {
-    const timestamp = getTimestamp(post.date)
+    const timestamp = getTimestamp(post.date);
+    const {friends} = useUserData();
     
     return (
         <div className="post">
             <div className="post-title">
-                <Avatar />
+                <span>{friends[post.uid]}</span>  
                 <span>{timestamp}</span>
             </div>
             <div className="post-body">
