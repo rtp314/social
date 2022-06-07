@@ -3,6 +3,8 @@ import React, {useEffect, useRef, useState} from "react";
 import { auth, db } from "../libs/firebase_config";
 import { useUserData } from "../libs/UserContext";
 import Chat from "./Chat";
+import messageIcon from "../images/message-svgrepo-com.svg";
+import Testing from "./Testing";
 
 export default function Sidebar() {
     const myID = auth.currentUser.uid
@@ -84,7 +86,7 @@ export default function Sidebar() {
         <>
             <div id="friends-list">
                 
-                <h3>Chats</h3>
+                <h3 className="align-center"><img id="message-icon" src={messageIcon}/><span>&nbsp;Chats</span></h3>
                 <div className="highlight secondary" onClick={showFriends}>New Chat</div>
                 <dialog className="modal" ref={friendsModal}>
                     <h3>Friends</h3>
@@ -101,6 +103,7 @@ export default function Sidebar() {
                 }
             </div>
             {openChatBox && <Chat chatID={currentChatID} chatName={currentChatName} setOpenChatBox={setOpenChatBox} />}
+            <Testing />
         </>
     )
 }

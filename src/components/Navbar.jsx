@@ -3,7 +3,7 @@ import useAuthStatus from "../libs/useAuthStatus";
 import { signOut } from "firebase/auth";
 import { auth } from "../libs/firebase_config";
 import logo from "../images/logo3.svg";
-import gear from "../images/gear-svgrepo-com.svg"
+import gear from "../images/gear-svgrepo-com.svg";
 import { Link, Outlet} from "react-router-dom";
 
 export default function Navbar() {
@@ -29,7 +29,7 @@ export default function Navbar() {
                     </div>
                 </div>
             </nav>
-            <div className="main wrapper-center">
+            <div id="main" className="wrapper-center">
                 <Outlet />
             </div>
         </>

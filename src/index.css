@@ -21,6 +21,22 @@ body {
   background: rgb(230, 230, 230)
 }
 
+#main {
+  margin: 3rem auto 0 auto;
+  max-width: 100rem;
+}
+
+.feed {
+  min-width: 25rem;
+  background: white;
+  padding: 0.5rem;
+}
+
+.sidebar {
+  min-width: 12rem;
+  background: white;
+}
+
 .navbar {
   position: fixed;
   top: 0;
@@ -76,17 +92,6 @@ li {
 
 }
 
-.feed {
-  width: 40%;
-  background: white;
-  padding: 0.5rem;
-}
-
-.sidebar {
-  width: 20%;
-  background: white;
-}
-
 .login {
   margin: auto;
   width: auto;
@@ -105,15 +110,20 @@ li {
   padding: 1rem;
 }
 
-.wrapper-center {
-  margin-top: 3rem;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
+h3 {
+  margin: 0.5em 1em;
 }
 
 /* MESSAGES */
+
+#friends-list {
+  position: sticky;
+  top: 4rem;
+}
+
+#message-icon {
+  height: 1.2rem;
+}
 
 .chatbox {
   position: fixed;

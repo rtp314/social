@@ -1,5 +1,15 @@
 /* UTILITY CLASSES */
 
+/* 
+CONTENTS
+  ALIGNMENT
+  MARGINS/PADDING
+  COLORS 
+*/
+
+
+/* ALIGNMENT */
+
 .flex-between {
     display: flex;
     flex-flow: row;
@@ -11,6 +21,15 @@
   display: flex;
   align-items: center;
 }
+
+.wrapper-center {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+/* MARGINS / PADDING */
 
 .m0 {
   margin: 0;
@@ -41,6 +60,8 @@
 .h100 {
   height: 100%;
 }
+
+/* COLOURS & BORDERS */
 
 .primary {
   background: var(--primary) !important;
@@ -87,17 +108,6 @@
 .modal::backdrop {
   background: black;
   opacity: 0.5;
-}
-
-h3 {
-  margin: 0.5em 1em;
-}
-
-.space-between {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .em {
