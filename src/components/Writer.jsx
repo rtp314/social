@@ -26,7 +26,7 @@ export default function Writer() {
         setNewPost("");
         await addDoc(collection(db, "posts"), {
             uid: auth.currentUser.uid,
-            body: input.current.value,
+            body: msg,
             date: Timestamp.now(),
             images: uploadedImages
         })
@@ -70,8 +70,21 @@ export default function Writer() {
 
     return(
         <div id="post-writer" onDragOver={handleDragOver} onDrop={handleDrop} className="writer post">
-            <input type="text" ref={input} className="input" placeholder="What's on your mind?" />
-            <input type="file" ref={fileUpload} onChange={handleUpload} accept="image/*" hidden/>
+            <input 
+                type="text" 
+                ref={input} 
+                value={newPost} 
+                onChange={e => setNewPost(e.target.value)} 
+                className="input" 
+                placeholder="What's on your mind?" 
+            />
+            <input 
+                type="file" 
+                ref={fileUpload} 
+                onChange={handleUpload} 
+                accept="image/*" 
+                hidden
+            />
             <button className="button primary" onClick={handleNewPost} type="button">Post</button>
             <button className="light" type="button" onClick={()=>fileUpload.current.click()}>Add Image</button>
         </div>
