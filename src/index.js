@@ -1,7 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import './utility.css'
+import './styles/index.css';
+import './styles/utility.css';
+import "./styles/chat.css";
+import './styles/navbar.css';
+import './styles/posts.css'
 import Navbar from './components/Navbar'
 import App from './App';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';

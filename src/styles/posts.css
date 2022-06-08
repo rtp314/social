@@ -1,0 +1,65 @@
+/* POSTS */
+
+.feed {
+    min-width: 40rem;
+    background: white;
+    padding: 0.5rem;
+    overflow-y: scroll;
+  }
+
+.post {
+    border: solid rgb(200,200,200) 1px;
+    border-radius: 5px;
+    padding: 0.5rem;
+    margin: 0.5em;
+}
+  
+.post-title {
+    display: flex;
+    justify-content: space-between;
+}
+
+.post-body {
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
+}
+
+.post-img {
+    max-width: 36rem;
+}
+
+.reactions {
+    text-align: right;
+    background: white;
+}
+
+button {
+    font-size: 1.2rem;
+    border-radius: 0.2em;
+    outline: none;
+    border: none;
+    margin: 0.3em;
+    padding: 0.2em 0.5em;
+}
+  
+/* WRITER */
+
+.writer input {
+    border: none;
+    width: 100%;
+    font-size: 1.3rem;
+}
+  
+.writer input:focus {
+    outline: none;
+}
+  
+.writer input::placeholder {
+    color:rgb(194, 194, 194);
+}
+  
+#writer-input {
+    font-size: 1.2rem;
+    padding: 0.5em;
+}
+  

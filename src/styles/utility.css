@@ -29,6 +29,10 @@ CONTENTS
   gap: 2rem;
 }
 
+.flex {
+  display: flex;
+}
+
 /* MARGINS / PADDING */
 
 .m0 {
@@ -91,6 +95,7 @@ CONTENTS
   border-radius: 0.2em;
   margin: 0.2em 0.2em;
   border: solid 1px rgb(192, 192, 192);
+  animation: slide 300ms ease-out;
 }
 
 .highlight:hover {
@@ -118,4 +123,12 @@ CONTENTS
   color: currentColor;
   text-decoration: none;
   cursor: default;
+}
+
+.skeleton-text {
+  background:rgb(192, 192, 192);
+  width: 20%;
+  height: 1em;
+  display: inline-block;
+  transform-origin: top left;
 }

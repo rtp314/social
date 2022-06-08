@@ -1,0 +1,35 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 2.5rem;
+    background: var(--light);
+    color: white;
+    font-weight: bold;
+    box-shadow: 0px 2px 3px rgba(100,100,100,0.6);
+    z-index: 10;
+  }
+  
+  #logo-img {
+    height: 2rem;
+    width: 2rem;
+  }
+  
+  #gear-img {
+    height: 1.3rem;
+    width: 1.3rem;
+    margin-top: 0.2rem;
+  }
+
+.dropdown {
+    position: relative;
+  }
+  
+  #user-menu {
+    position: absolute;
+    display: block;
+    left: -5rem;
+    border-radius: 0.5em;
+  
+  }

@@ -1,0 +1,101 @@
+/* MESSAGES */
+
+#friends-list {
+    position: sticky;
+  }
+  
+  #message-icon {
+    height: 1.2rem;
+    z-index: 3;
+  }
+  
+  .chatbox {
+    position: fixed;
+    bottom: 0px;
+    right: 3rem;
+    padding: 0.5rem;
+    background: white;
+    border-radius: 0.5em;
+    border: #eee solid 1px;
+  }
+  
+  .chat-messages {
+    max-height: 40vh;
+    overflow-y: scroll;
+  }
+  
+  .chat-writer {
+    padding-top: 0.4rem;
+  }
+  
+  .chat-writer input {
+    outline: none;
+    border: none;
+    font-size: 1.1rem;
+  }
+  
+  .chat-writer input::placeholder {
+    color:rgb(199, 199, 199);
+  }
+  
+  .messagegroup {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 0.5em;
+  }
+  
+  .timestamp {
+    color: rgba(0, 0, 0, 0.719);
+    font-size: 0.6rem;
+    margin-right: 0.5em;
+  }
+  
+  .msg {
+    border-radius: 5px;
+    padding: 0.2em 0.5em;
+  }
+  
+  .sentMsg {
+    background: rgba(108, 228, 108, 0.6);
+    align-self: flex-start;
+  }
+  
+  .receivedMsg {
+    background: rgba(124, 124, 228, 0.6);
+    align-self: flex-end;
+    text-align: right;
+  }
+
+  .circle {
+    width: 1rem;
+    height: 1rem;
+    background: radial-gradient(circle, rgba(255,255,255,1) 49%, rgba(238,238,238,1) 79%);
+    position: absolute;
+    border-radius: 50%;
+    z-index: -1;
+  }
+  
+  .circle-animate {
+    animation: expand 700ms ease-in;
+  }
+  
+  @keyframes expand {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(100);
+    }
+  }
+  
+  @keyframes slide {
+    0% {
+      transform: scaleY(0);
+    }
+  
+    100% {
+      transform: scaleY(1)
+    }
+  }
+  
