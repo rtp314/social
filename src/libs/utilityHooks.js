@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from "react";
+import { useRef } from "react";
 
 
 export function useTimeout() {
@@ -42,5 +42,18 @@ export function useDebounce() {
     }
 
     return debounce
+}
+
+export function useInterval() {
+    const intervalRef = useRef();
+
+    const interval = (callback, ms) => {
+        console.log("interval set")
+        intervalRef.current = setInterval(callback, ms)
+    };
+
+    const clear = () => clearInterval(intervalRef.current);
+
+    return [interval, clear]
 }
 

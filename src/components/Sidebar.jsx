@@ -4,7 +4,6 @@ import { auth, db } from "../libs/firebase_config";
 import { useUserData } from "../libs/UserContext";
 import Chat from "./Chat";
 import messageIcon from "../images/message-svgrepo-com.svg";
-import Testing from "./Testing";
 
 export default function Sidebar() {
     const myID = auth.currentUser.uid
@@ -103,7 +102,6 @@ export default function Sidebar() {
                 }
             </div>
             {openChatBox && <Chat chatID={currentChatID} chatName={currentChatName} setOpenChatBox={setOpenChatBox} />}
-            <Testing />
         </>
     )
 }

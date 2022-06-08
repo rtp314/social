@@ -12,7 +12,7 @@ export default function Post({post, now}) {
     return (
         <div className="post">
             <div className="post-title">
-                <span>{friends[post.uid]}</span>  
+                <span>{friends && friends[post.uid]}</span>  
                 <span>{timestamp}</span>
             </div>
             <div className="post-body">
