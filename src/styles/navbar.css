@@ -24,12 +24,22 @@
 
 .dropdown {
     position: relative;
-  }
+}
   
-  #user-menu {
+#user-menu {
     position: absolute;
     display: block;
     left: -5rem;
     border-radius: 0.5em;
-  
-  }
+    transform-origin: top right;
+    animation: scrolldown 200ms both;
+}
+
+@keyframes scrolldown {
+    0% {
+        transform: scaleY(0);
+    }
+    100% {
+        transform: scaleY(1);
+    }
+}
