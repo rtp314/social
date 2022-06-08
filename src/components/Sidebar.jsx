@@ -2,17 +2,21 @@ import { doc, collection, setDoc, query, getDocs } from "firebase/firestore";
 import React, {useEffect, useRef, useState} from "react";
 import { auth, db } from "../libs/firebase_config";
 import { useUserData } from "../libs/UserContext";
+import {useTimeout} from "../libs/utilityHooks";
 import Chat from "./Chat";
 import messageIcon from "../images/message-svgrepo-com.svg";
 
 export default function Sidebar() {
     const myID = auth.currentUser.uid
     const [openChatBox, setOpenChatBox] = useState(false);
+    const [openChatList, setOpenChatList] = useState(false);
+    const [timeout, clear] = useTimeout();
     const [chats, setChats] = useState([]);
     const [currentChatID, setCurrentChatID] = useState("")
     const [currentChatName, setCurrentChatName] = useState("")
     const myData = useUserData()
     const friendsModal = useRef();
+    const circle = useRef();
 
     async function getChatList() {
         //get the chat list
@@ -30,13 +34,12 @@ export default function Sidebar() {
         setChats(chatList)
     }
 
-    async function startChat(uid) {
+    async function startNewChat(uid) {
         friendsModal.current.close()
         const test = chats.find(chat => chat.uid === uid)
 
         if (test != undefined) {
 
-            console.log("found old chat");
             setCurrentChatID(test.chatID);
             setCurrentChatName(myData.friends[uid]);
             setOpenChatBox(true);
@@ -65,7 +68,7 @@ export default function Sidebar() {
         }
     }
 
-    function openChat(chat) {
+    function openOldChat(chat) {
         setCurrentChatID(chat.chatID);
         setCurrentChatName(myData.friends[chat.uid]);
         setOpenChatBox(true);
@@ -77,6 +80,20 @@ export default function Sidebar() {
         }
     }
 
+    function animate() {
+        circle.current.classList.add("circle-animate");
+        timeout(()=>circle.current.classList.remove("circle-animate"), 700)
+    }
+
+    function openChatApp() {
+        if (openChatList === false) {
+            animate();
+            setOpenChatList(true)
+        } else {
+            setOpenChatList(false)
+        }
+    }
+
     useEffect(()=>{
         getChatList();
     }, [])
@@ -85,21 +102,31 @@ export default function Sidebar() {
         <>
             <div id="friends-list">
                 
-                <h3 className="align-center"><img id="message-icon" src={messageIcon}/><span>&nbsp;Chats</span></h3>
+                <h3 className="align-center" onClick={openChatApp}>
+                    <img id="message-icon" src={messageIcon}/>
+                    <div className="circle" ref={circle}></div>
+                    <span>&nbsp;Chats</span>
+                </h3>
+                
+                {openChatList &&
+                <>
                 <div className="highlight secondary" onClick={showFriends}>New Chat</div>
+
                 <dialog className="modal" ref={friendsModal}>
                     <h3>Friends</h3>
                     {typeof myData.friends === "object" && Object.keys(myData.friends).map((uid, i) => { return (
-                        <div className="highlight" key={i} onClick={()=>startChat(uid)}>{myData.friends[uid]}</div>
+                        <div className="highlight" key={i} onClick={()=>startNewChat(uid)}>{myData.friends[uid]}</div>
                     )})}
                     <button value="cancel" onClick={()=>friendsModal.current.close()}>Cancel</button>
                 </dialog>
                     
                 {typeof myData.friends === "object" && chats.length > 0 && 
                     chats.map((chat, i) => { return (
-                        <div key={i} className="highlight" onClick={()=>openChat(chat)}>{myData.friends[chat.uid]}</div>
+                        <div key={i} className="highlight" onClick={()=>openOldChat(chat)}>{myData.friends[chat.uid]}</div>
                     )})
                 }
+                </>}
+                
             </div>
             {openChatBox && <Chat chatID={currentChatID} chatName={currentChatName} setOpenChatBox={setOpenChatBox} />}
         </>
