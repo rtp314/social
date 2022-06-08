@@ -2,6 +2,7 @@ import { collection, limit, onSnapshot, orderBy, query } from "firebase/firestor
 import React, { useEffect, useState } from "react";
 import { db } from "../libs/firebase_config";
 import Post from "./Post";
+import PostSkeleton from "./Post-Skeleton";
 
 export default function Posts() {
     const [postsArray, setPostsArray] = useState([]);
@@ -28,6 +29,7 @@ export default function Posts() {
 
     return(
         <div>
+            {postsArray.length === 0 && <PostSkeleton />}
             {postsArray.map((post, index) => <Post now={now} post={post} key={index} />)}
         </div>
     )

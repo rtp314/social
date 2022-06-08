@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Posts from "./components/Posts";
 import Sidebar from "./components/Sidebar";
 import Writer from "./components/Writer";

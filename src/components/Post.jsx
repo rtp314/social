@@ -1,11 +1,8 @@
-import React, { useEffect, useRef } from "react";
-import Avatar from "./Avatar";
-import Reactions from "./Reactions";
+import React from "react";
 import { getTimestamp } from "../libs/utils";
-import { getDownloadURL } from "firebase/storage";
 import { useUserData } from "../libs/UserContext";
 
-export default function Post({post, now}) {
+export default function Post({post}) {
     const timestamp = getTimestamp(post.date);
     const {friends} = useUserData();
     
@@ -17,11 +14,10 @@ export default function Post({post, now}) {
             </div>
             <div className="post-body">
                 {post.images && <div>
-                    {post.images.map(url => <img className="post-img" src={url} />)}
+                    {post.images.map((url, i) => <img key={i} alt={post.date + i} className="post-img" src={url} />)}
                 </div>}
                 {post.body}
             </div>
-            <Reactions />
         </div>
     )
 

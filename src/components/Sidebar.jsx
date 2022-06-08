@@ -126,7 +126,6 @@ export default function Sidebar() {
                     )})
                 }
                 </>}
-                
             </div>
             {openChatBox && <Chat chatID={currentChatID} chatName={currentChatName} setOpenChatBox={setOpenChatBox} />}
         </>
