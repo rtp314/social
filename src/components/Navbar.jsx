@@ -7,7 +7,7 @@ import gear from "../images/gear-svgrepo-com.svg";
 import { Link, Outlet} from "react-router-dom";
 
 export default function Navbar() {
-    const [isLoggedIn, myID] = useAuthStatus();
+    const {loggedIn} = useAuthStatus();
 
         function handleNav() {
 
@@ -25,7 +25,7 @@ export default function Navbar() {
                     </Link>
                     <div className="align-center">
                         <UserMenu />
-                        {isLoggedIn ? auth.currentUser.email : "not signed in"}
+                        {loggedIn ? auth.currentUser.email : "not signed in"}
                     </div>
                 </div>
             </nav>

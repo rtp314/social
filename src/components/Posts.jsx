@@ -20,7 +20,7 @@ export default function Posts() {
             const update = snapshot.docChanges()
                 .filter(change=>change.type === "added")
                 .map(change => change.doc.data());
-            setPostsArray(prev => [...prev, ...update]);
+            setPostsArray(prev => [...update, ...prev]);
             console.log(update)
         })
 

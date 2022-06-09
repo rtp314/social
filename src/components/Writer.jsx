@@ -3,22 +3,23 @@ import React, { useRef, useState } from "react";
 import { auth, db, storage } from "../libs/firebase_config";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
-
 export default function Writer() {
     const [newPost, setNewPost] = useState("");
     const [images, setImages] = useState([]);
     const fileUpload = useRef();
     const input = useRef();
+    const imgArray = useRef([]);
 
     async function handleNewPost(e) {
-        const uploadedImages = []
+        const uploadedImages = [];
         //first, upload images
-        for (let i=0; i<images.length; i++) {
-            const storageRef = ref(storage, `${auth.currentUser.uid}/${images[i].name}`)
-            console.log(images[i])
-            const snapshot = await uploadBytes(storageRef, images[i])
-            const url = await getDownloadURL(storageRef)
-            uploadedImages.push(url)
+        for (let i = 0; i < images.length; i++) {
+            const storageRef = ref(storage, `${auth.currentUser.uid}/${images[i].name}`);
+            console.log(images[i]);
+            const snapshot = await uploadBytes(storageRef, images[i]);
+            const url = await getDownloadURL(storageRef);
+            uploadedImages.push(url);
+            imgArray.current.forEach((img) => img.remove());
         }
 
         //second, upload post
@@ -28,17 +29,17 @@ export default function Writer() {
             uid: auth.currentUser.uid,
             body: msg,
             date: Timestamp.now(),
-            images: uploadedImages
-        })
+            images: uploadedImages,
+        });
     }
 
     function handleDrop(e) {
-        console.log(e.dataTransfer)
+        console.log(e.dataTransfer);
         e.stopPropagation();
         e.preventDefault();
         const dt = e.dataTransfer;
         const files = dt.files;
-        handleFiles(files)
+        handleFiles(files);
     }
 
     function handleUpload(e) {
@@ -48,45 +49,44 @@ export default function Writer() {
     }
 
     function handleFiles(files) {
-        console.log(files)
-        setImages(files)
+        console.log(files);
+        setImages(files);
         const append = document.getElementById("post-writer");
-        Array.from(files).forEach(file => {
-            console.log(file)
+        Array.from(files).forEach((file) => {
+            console.log(file);
             const img = document.createElement("img");
-            img.classList.add("post-img")
+            imgArray.current.push(img);
+            img.classList.add("post-img");
             img.file = file;
-            append.insertBefore(img, input.current)
+            append.insertBefore(img, input.current);
             const reader = new FileReader();
-            reader.onload = (e) => img.src = e.target.result;
+            reader.onload = (e) => (img.src = e.target.result);
             reader.readAsDataURL(file);
-        })
+        });
     }
 
     function handleDragOver(e) {
         e.preventDefault();
-        console.log("object entered drop zone")
+        console.log("object entered drop zone");
     }
 
-    return(
-        <div id="post-writer" onDragOver={handleDragOver} onDrop={handleDrop} className="writer post">
-            <input 
-                type="text" 
-                ref={input} 
-                value={newPost} 
-                onChange={e => setNewPost(e.target.value)} 
-                className="input" 
-                placeholder="What's on your mind?" 
+    return (
+        <div id='post-writer' onDragOver={handleDragOver} onDrop={handleDrop} className='writer post'>
+            <input
+                type='text'
+                ref={input}
+                value={newPost}
+                onChange={(e) => setNewPost(e.target.value)}
+                className='input'
+                placeholder="What's on your mind?"
             />
-            <input 
-                type="file" 
-                ref={fileUpload} 
-                onChange={handleUpload} 
-                accept="image/*" 
-                hidden
-            />
-            <button className="button primary" onClick={handleNewPost} type="button">Post</button>
-            <button className="light" type="button" onClick={()=>fileUpload.current.click()}>Add Image</button>
+            <input type='file' ref={fileUpload} onChange={handleUpload} accept='image/*' hidden />
+            <button className='button primary' onClick={handleNewPost} type='button'>
+                Post
+            </button>
+            <button className='light' type='button' onClick={() => fileUpload.current.click()}>
+                Add Image
+            </button>
         </div>
-    )
+    );
 }

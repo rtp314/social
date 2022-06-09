@@ -17,5 +17,5 @@ export default function useAuthStatus() {
         }
     })
    
-    return [loggedIn, myID]
+    return {loggedIn, myID}
 }

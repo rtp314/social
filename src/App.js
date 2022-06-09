@@ -6,7 +6,7 @@ import Writer from "./components/Writer";
 import useAuthStatus from "./libs/useAuthStatus";
 
 function App() {
-	const [loggedIn, myID] = useAuthStatus();
+	const {loggedIn} = useAuthStatus();
 
 	return (
 			<>

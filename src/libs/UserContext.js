@@ -10,7 +10,7 @@ export function useUserData() {
 };
 
 export function UserContextProvider({children}) {
-    const [loggedIn, myID] = useAuthStatus();
+    const {loggedIn, myID} = useAuthStatus();
     const [myData, setMyData] = useState({});
     const cachedUidList = useRef([]);
 

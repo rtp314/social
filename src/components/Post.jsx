@@ -1,15 +1,17 @@
 import React from "react";
 import { getTimestamp } from "../libs/utils";
 import { useUserData } from "../libs/UserContext";
+import useAuthStatus from "../libs/useAuthStatus";
 
 export default function Post({post}) {
     const timestamp = getTimestamp(post.date);
     const {friends} = useUserData();
+    const {myID} = useAuthStatus();
     
     return (
         <div className="post">
             <div className="post-title">
-                <span>{friends && friends[post.uid]}</span>  
+                <span>{post.uid === myID ? "Me" : friends && friends[post.uid]}</span>  
                 <span>{timestamp}</span>
             </div>
             <div className="post-body">
