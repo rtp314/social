@@ -1,113 +1,133 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400&display=swap");
 
 :root {
-  --primary: #3954C0;
-  --secondary: #2995B4;
-  --light: #74C2D8;
-  --highlight: #4BD775;
-  --danger: rgb(247, 122, 122);
-  --grey: rgb(230, 230, 230);
+    --primary: #3954c0;
+    --secondary: #2995b4;
+    --light: #74c2d8;
+    --highlight: #4bd775;
+    --danger: rgb(247, 122, 122);
+    --grey: rgb(230, 230, 230);
 }
 
 html {
-  padding: 0;
-  margin: 0;
+    padding: 0;
+    margin: 0;
 }
 
 body {
-  font-family: "Raleway";
-  padding: 0;
-  margin-top: 1rem;
-  background: rgb(230, 230, 230);
+    font-family: "Raleway";
+    padding: 0;
+    margin-top: 1rem;
+    background: rgb(230, 230, 230);
 }
 
 #main {
-  margin: 3rem auto 0 auto;
-  max-width: 100rem;
-  height: calc(100vh - 3.5rem);
-  overflow: hidden;
+    margin: 3rem auto 0 auto;
+    max-width: 100rem;
+    height: calc(100vh - 3.5rem);
+    overflow: hidden;
 }
 
+#entry {
+    text-align: center;
+}
 
+#entry-logo {
+    width: 10rem;
+    margin-top: 1rem;
+    color: var(--primary);
+    animation: rainbow 5000ms;
+}
 
+@keyframes rainbow {
+    0% {
+        color: var(--primary);
+    }
+
+    30% {
+        color: orange;
+    }
+
+    70% {
+        color: green;
+    }
+
+    100% {
+        color: var(--primary);
+    }
+}
 
 .sidebar {
-  min-width: 12rem;
-  background: white;
-  overflow: hidden;
+    min-width: 12rem;
+    background: white;
+    overflow: hidden;
 }
 
-
-
 ul {
-  padding: 0px;
-  margin: 0px;
+    padding: 0px;
+    margin: 0px;
 }
 
 li {
-  text-decoration: none;
-  margin: 0;
-  padding: 0.3em;
-  color: black;
-  list-style: none;
-  min-width: 8rem;
-  background-color: white;
-  border-bottom: var(--light) 1px solid;
+    text-decoration: none;
+    margin: 0;
+    padding: 0.3em;
+    color: black;
+    list-style: none;
+    min-width: 8rem;
+    background-color: white;
+    border-bottom: var(--light) 1px solid;
 }
 
-
-
 .login {
-  margin: auto;
-  width: auto;
-  border: solid grey 1px;
-  border-radius: 0.5rem;
-  text-align: center;
-  padding: 1rem;
+    margin: auto;
+    width: auto;
+    border: solid grey 1px;
+    border-radius: 0.5rem;
+    text-align: center;
+    padding: 1rem;
 }
 
 .saved-users {
-  margin: auto;
-  width: auto;
-  border: solid grey 1px;
-  border-radius: 0.5rem;
-  text-align: center;
-  padding: 1rem;
+    margin: auto;
+    width: auto;
+    border: solid grey 1px;
+    border-radius: 0.5rem;
+    text-align: center;
+    padding: 1rem;
 }
 
 h3 {
-  margin: 0.5em 1em;
+    margin: 0.5em 1em;
 }
-
 
 /* AVATAR */
 
 .avatar {
-  display: flex;
-  gap: 0.5rem;
-  font-size: 1.3rem;
+    display: flex;
+    gap: 0.5rem;
+    font-size: 1.3rem;
 }
 
 .avatar-image {
-  border-radius: 50%;
-   width: 3rem;
-   height: 3rem;
-   background: grey;
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    background: grey;
 }
-
 
 /* ANIMATIONS */
 
 @keyframes stretch {
-  0% {
-    transform: scaleX(1) 
-  }
+    0% {
+        transform: scaleX(1);
+    }
 
-  50% {
-    transform:  scaleX(0.8) 
-  }
+    50% {
+        transform: scaleX(0.8);
+    }
 
-  100% {
-    transform: scaleX(1);
-  }
+    100% {
+        transform: scaleX(1);
+    }
 }
