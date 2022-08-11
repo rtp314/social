@@ -1,0 +1,14 @@
+#user {
+    display: flex;
+}
+
+.settings-sidebar {
+    margin-top: 2rem;
+    max-width: 10rem;
+}
+
+.settings-main {
+    padding: 1rem;
+    padding-left: 2rem;
+    width: 100%;
+}
