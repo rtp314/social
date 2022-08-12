@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import useAuthStatus from "../libs/useAuthStatus";
 import { signOut } from "firebase/auth";
 import { auth } from "../libs/firebase_config";
-import { ReactComponent as Logo } from "../images/logo3.svg";
-import gear from "../images/gear-svgrepo-com.svg";
+import logo from "/images/logo3.svg";
+import gear from "/images/gear-svgrepo-com.svg";
 import { Link, Outlet } from "react-router-dom";
 
 export default function Navbar() {
@@ -17,7 +17,7 @@ export default function Navbar() {
 				<div className='flex-between h100 m3x'>
 					<Link className='plain-link em' to='/'>
 						<div className='align-center' onClick={handleNav}>
-							<Logo id='logo-img' alt='Social Logo' />
+							<img id='logo-img' src={logo} alt='Social Logo' />
 							<span className='mx1'>Social</span>
 						</div>
 					</Link>

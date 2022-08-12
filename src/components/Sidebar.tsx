@@ -5,7 +5,7 @@ import { UserContext } from "../libs/UserContext";
 import { useTimeout } from "../libs/utilityHooks";
 import Chat from "./Chat";
 //@ts-ignore
-import messageIcon from "../images/message-svgrepo-com.svg";
+import messageIcon from "/images/message-svgrepo-com.svg";
 
 type ChatType = {
 	uid: string;
