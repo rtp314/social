@@ -1,10 +1,20 @@
-import { getDoc, doc, onSnapshot } from "firebase/firestore";
+import { getDoc, doc, onSnapshot, DocumentSnapshot } from "firebase/firestore";
 import React, { createContext, useRef, useEffect, useState, useContext } from "react";
 import { db } from "./firebase_config";
 import useAuthStatus from "./useAuthStatus";
 
+export type MyData = {
+	email: string;
+	friends: object;
+};
+
+type MyDataBeforeLookup = {
+	email: string;
+	friends: string[];
+};
+
 //@ts-ignore
-export const UserContext = createContext();
+export const UserContext = createContext<MyData | undefined>();
 
 export function useUserData() {
 	return useContext(UserContext);
@@ -12,11 +22,11 @@ export function useUserData() {
 
 export function UserContextProvider({ children }) {
 	const { loggedIn, myID } = useAuthStatus();
-	const [myData, setMyData] = useState({});
+	const [myData, setMyData] = useState<MyData>();
 	const cachedUidList = useRef<string[]>([]);
 
-	async function handleSnapshot(snapshot) {
-		const newData = snapshot.data();
+	async function handleSnapshot(snapshot: DocumentSnapshot) {
+		const newData = snapshot.data() as MyDataBeforeLookup;
 		const friendUIDs: string[] = newData.friends;
 
 		//check if this uid has already been looked up
@@ -55,8 +65,6 @@ export function UserContextProvider({ children }) {
 			const ref = doc(db, "users", myID);
 			const unsubscribe = onSnapshot(ref, handleSnapshot);
 			return () => unsubscribe();
-		} else {
-			setMyData({});
 		}
 	}, [loggedIn, myID]);
 

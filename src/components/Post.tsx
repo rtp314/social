@@ -1,11 +1,11 @@
-import React from "react";
-import { getTimestamp } from "../libs/utils.ts";
-import { useUserData } from "../libs/UserContext";
+import React, { useContext } from "react";
+import { getTimestamp } from "../libs/utils";
+import { UserContext } from "../libs/UserContext";
 import useAuthStatus from "../libs/useAuthStatus";
 
 export default function Post({ post }) {
 	const timestamp = getTimestamp(post.date);
-	const { friends } = useUserData();
+	const { friends } = useContext(UserContext);
 	const { myID } = useAuthStatus();
 
 	return (
@@ -17,7 +17,7 @@ export default function Post({ post }) {
 			<div className='post-body'>
 				{post.images && (
 					<div>
-						{post.images.map((url, i) => (
+						{post.images.map((url: string, i: number) => (
 							<img key={i} alt={post.date + i} className='post-img' src={url} />
 						))}
 					</div>

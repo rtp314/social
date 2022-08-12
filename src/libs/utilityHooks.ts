@@ -1,9 +1,9 @@
 import { useRef } from "react";
 
 export function useTimeout() {
-	const timeoutRef = useRef();
-	const callbackRef = useRef();
-	const delayRef = useRef();
+	const timeoutRef = useRef<NodeJS.Timeout>();
+	const callbackRef = useRef<() => any>();
+	const delayRef = useRef<number>();
 
 	const timeout = (callback: () => any, delay: number): NodeJS.Timeout => {
 		callbackRef.current = callback;
@@ -29,7 +29,7 @@ export function useTimeout() {
 }
 
 export function useDebounce() {
-	const timeoutID = useRef();
+	const timeoutID = useRef<NodeJS.Timeout>();
 	const { timeout, reset } = useTimeout();
 
 	const debounce = (callback: () => any, delay: number) => {
@@ -44,14 +44,14 @@ export function useDebounce() {
 }
 
 export function useInterval() {
-	const intervalRef = useRef();
+	const intervalRef = useRef<NodeJS.Timer>();
 
 	const interval = (callback: () => any, ms: number) => {
 		console.log("interval set");
 		intervalRef.current = setInterval(callback, ms);
 	};
 
-	const clear = () => clearInterval(intervalRef.current);
+	const clear = () => clearInterval(intervalRef.current as any as number);
 
 	return { interval, clear };
 }

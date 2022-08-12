@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { collection, query, onSnapshot, orderBy, Timestamp } from "firebase/firestore";
 import { db } from "./firebase_config";
 
-type Message = {
+export type Message = {
 	uid: string;
 	date: Timestamp;
 	msg: string;
@@ -16,7 +16,7 @@ type RawMessage = {
 	msg: string;
 };
 
-function useMessages(chatID: string) {
+function useMessages(chatID: string): [boolean, Message[][]] {
 	const [msgList, setMsgList] = useState<Message[][]>([[]]);
 	const [loading, setLoading] = useState(true);
 	const oldChatID = useRef<string>();
