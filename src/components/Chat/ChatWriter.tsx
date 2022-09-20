@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
 import { auth, db } from "../../libs/firebase_config";
 
-export default function ChatWriter({ chatID }) {
+interface Props {
+	chatID: string;
+}
+
+export default function ChatWriter({ chatID }: Props) {
 	const [newMsg, setNewMsg] = useState<string>("");
 
 	async function handleMessage(e: React.FormEvent) {
