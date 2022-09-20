@@ -99,10 +99,16 @@ export default function Sidebar() {
 	}
 
 	useEffect(() => {
+		setCurrentChatID((prev) => prev);
+	}, [myData]);
+
+	useEffect(() => {
 		getChatList();
 	}, []); // eslint-disable-line -- This is definitely only going to be called once
 
-	if (myData === undefined) return <div>Error</div>;
+	if (myData === undefined) {
+		return <div>Error</div>;
+	}
 
 	return (
 		<>

@@ -2,8 +2,9 @@ import React from "react";
 import { getTimestamp } from "../../libs/utils";
 import useAuthStatus from "../../libs/useAuthStatus";
 import { myData } from "../../libs/currentUserData";
+import { DocumentData } from "firebase/firestore";
 
-export default function Post({ post }) {
+export default function Post({ post }: { post: DocumentData }) {
 	const timestamp = getTimestamp(post.date);
 	const { myID } = useAuthStatus();
 

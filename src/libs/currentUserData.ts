@@ -1,5 +1,5 @@
-import { onAuthStateChanged } from "firebase/auth";
-import { getDoc, doc, onSnapshot, DocumentSnapshot } from "firebase/firestore";
+import { onAuthStateChanged, Unsubscribe } from "firebase/auth";
+import { getDoc, doc, onSnapshot, DocumentSnapshot, collection } from "firebase/firestore";
 import { db, auth } from "./firebase_config";
 
 export type MyData = {
@@ -14,6 +14,7 @@ type MyDataBeforeLookup = {
 	friends: string[]; // array of uids
 };
 
+let unsubscribeFromUserData: Unsubscribe;
 let myUid: string;
 let myData: MyData;
 let myFriendsUids: string[] = [];
@@ -22,8 +23,9 @@ onAuthStateChanged(auth, (user) => {
 	if (user) {
 		myUid = user.uid;
 		const ref = doc(db, "users", user.uid);
-		onSnapshot(ref, handleSnapshot);
-	} else {
+		unsubscribeFromUserData = onSnapshot(ref, handleSnapshot);
+	} else if (unsubscribeFromUserData) {
+		unsubscribeFromUserData();
 	}
 });
 
@@ -43,7 +45,7 @@ async function handleSnapshot(snapshot: DocumentSnapshot) {
 	}
 
 	//get all friend details
-	const friendDetails = {};
+	const friendDetails: { [uid: string]: string } = {};
 
 	await Promise.all(
 		myFriendsUids.map(
@@ -57,6 +59,7 @@ async function handleSnapshot(snapshot: DocumentSnapshot) {
 							resolve();
 						})
 						.catch((error) => {
+							console.error("Error fetching friend details");
 							console.error(error);
 							reject();
 						});
