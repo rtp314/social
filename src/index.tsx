@@ -11,6 +11,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import User from "./pages/User";
+import Entry from "./components/Entry";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
@@ -24,6 +25,7 @@ root.render(
 					<Route path='signup' element={<Signup />} />
 					<Route path='user' element={<User />} />
 				</Route>
+				<Route path='/entry' element={<Entry />} />
 			</Routes>
 		</BrowserRouter>
 	</React.StrictMode>

@@ -21,7 +21,9 @@ Saved in "posts" collection
 
 Todo:
 
+-   Only show posts from your friends
 -   Add reactions
+-   Allow user to edit or delete their own posts
 
 ### Chats
 

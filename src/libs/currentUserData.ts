@@ -14,19 +14,16 @@ type MyDataBeforeLookup = {
 	friends: string[]; // array of uids
 };
 
-let loggedIn = false;
 let myUid: string;
 let myData: MyData;
 let myFriendsUids: string[] = [];
 
 onAuthStateChanged(auth, (user) => {
 	if (user) {
-		loggedIn = true;
 		myUid = user.uid;
-		const ref = doc(db, "users", myUid);
+		const ref = doc(db, "users", user.uid);
 		onSnapshot(ref, handleSnapshot);
 	} else {
-		loggedIn = false;
 	}
 });
 
@@ -70,4 +67,4 @@ async function handleSnapshot(snapshot: DocumentSnapshot) {
 	myData = { ...newData, friends: friendDetails };
 }
 
-export { loggedIn, myData, myUid };
+export { myData, myUid };

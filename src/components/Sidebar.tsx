@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { db } from "../libs/firebase_config";
 import { useTimeout } from "../libs/utilityHooks";
 import Chat from "./Chat/Chat";
-import { myUid, myData } from "../libs/useUserData";
+import { myData, myUid } from "../libs/currentUserData";
 //@ts-ignore
 import messageIcon from "/images/message-svgrepo-com.svg";
 
