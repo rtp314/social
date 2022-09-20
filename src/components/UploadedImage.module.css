@@ -1,0 +1,19 @@
+.container {
+	width: 75%;
+	position: relative;
+}
+
+.delete {
+	padding: 0.5rem;
+	background-color: #0005;
+	position: absolute;
+	right: 0;
+	top: 0;
+	color: white;
+	font-weight: bold;
+}
+
+.image {
+	width: 100%;
+	object-fit: contain;
+}

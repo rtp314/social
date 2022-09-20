@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { auth } from "../libs/firebase_config";
-import useMessages from "../libs/useMessages";
+import { auth } from "../../libs/firebase_config";
+import useMessages from "../../libs/useMessages";
 import MessageGroup from "./MessageGroup";
 import ChatWriter from "./ChatWriter";
 

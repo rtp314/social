@@ -1,6 +1,6 @@
 import { collection, DocumentData, limit, onSnapshot, orderBy, query } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { db } from "../libs/firebase_config";
+import { db } from "../../libs/firebase_config";
 import Post from "./Post";
 import PostSkeleton from "./Post-Skeleton";
 
@@ -22,7 +22,6 @@ export default function Posts() {
 				.filter((change) => change.type === "added")
 				.map((change) => change.doc.data());
 			setPostsArray((prev) => [...update, ...prev]);
-			console.log(update);
 		});
 
 		return () => unsubscribe();

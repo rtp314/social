@@ -10,39 +10,31 @@ Store list of friends for each user
 When starting a chat, create a new database collection for that 'chatroom' (unique ID, or concat the two uids)
 Client returns latest 100 messages from that collection
 
+Test Accounts:
+1111@gmail.com nWfer1fBVTYsmn3xSTl5TpUgNr13
+4321@gmail.com fx0DiCs3eMgGGljEVbIcL9Ewbkc2
+1234@gmail.com NusVhLAhRYUpPO2lj3dIGDdwhcH3
 
-Goals:
-1. Set up users and friends, friend lists
-2. Friend list in chat
-3. Create chatrooms
-4. retrieve messages, create cursor
+### Posts
 
-1111@gmail.com  nWfer1fBVTYsmn3xSTl5TpUgNr13
-4321@gmail.com  fx0DiCs3eMgGGljEVbIcL9Ewbkc2
-1234@gmail.com  NusVhLAhRYUpPO2lj3dIGDdwhcH3
+Saved in "posts" collection
 
+Todo:
 
-Data Schema:
+-   Add reactions
 
-users (collection)
-    --user ID (current user)
-        --chats (subcollection)
-            --user ID (map)
-                --chat ID: [array of user IDs in chat]
-            --user ID (map)
-                --chat ID: [array of user IDs in chat]
-                --chat ID (second chat with multiple users)
-            ...
-            --(random ID) (map)
-                --chat_ID: {chat_ID}
-                --users: {array of users}
+### Chats
 
-chats (collection)
-    --chat ID (doc)
-        --messages (subcollection)
-            --message ID
-                --user
-                --message
-                --date
-            --message ID
-                ...
+Saved in "chats" collection
+
+Todo:
+
+-   Unread message notifications
+
+### User Data
+
+Todo:
+
+-   Add user settings: change name, email
+-   Preferences: save to local storage?
+-   'Add friends' page

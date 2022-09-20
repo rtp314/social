@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import { getTimestamp } from "../libs/utils";
-import { UserContext } from "../libs/UserContext";
-import useAuthStatus from "../libs/useAuthStatus";
+import { getTimestamp } from "../../libs/utils";
+import { UserContext } from "../../libs/UserContext";
+import useAuthStatus from "../../libs/useAuthStatus";
 
 export default function Post({ post }) {
 	const timestamp = getTimestamp(post.date);

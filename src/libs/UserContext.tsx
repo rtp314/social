@@ -16,8 +16,10 @@ type MyDataBeforeLookup = {
 //@ts-ignore
 export const UserContext = createContext<MyData | undefined>();
 
-export function useUserData() {
-	return useContext(UserContext);
+export function useUserData(): MyData | void {
+	const myData = useContext(UserContext);
+	if (myData) return myData as MyData;
+	else console.error("user data undefined");
 }
 
 export function UserContextProvider({ children }) {

@@ -1,6 +1,6 @@
 import React from "react";
 import ChatMessage from "./ChatMessage";
-import { Message } from "../libs/useMessages";
+import { Message } from "../../libs/useMessages";
 
 type MessageGroupProps = {
 	msgGroup: Message[];

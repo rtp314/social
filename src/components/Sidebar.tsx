@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { auth, db } from "../libs/firebase_config";
 import { UserContext } from "../libs/UserContext";
 import { useTimeout } from "../libs/utilityHooks";
-import Chat from "./Chat";
+import Chat from "./Chat/Chat";
 //@ts-ignore
 import messageIcon from "/images/message-svgrepo-com.svg";
 
@@ -30,7 +30,7 @@ export default function Sidebar() {
 		const chatData = await getDocs(q);
 		let chatList: ChatType[] = [];
 
-		// chatData format: [{chat_id: xxx, users: [yy, zz]}, {...}]
+		// chatData format: [{chat_id: xxx, users: [yy, zz]}, {etc}]
 		chatData.forEach((chat) => {
 			let data = chat.data();
 			let uid = chat.id;
@@ -41,6 +41,7 @@ export default function Sidebar() {
 	}
 
 	async function startNewChat(uid: string) {
+		if (!myData) return;
 		friendsModal.current?.close();
 		const test = chats.find((chat) => chat.uid === uid);
 
@@ -71,6 +72,7 @@ export default function Sidebar() {
 	}
 
 	function openOldChat(chat: ChatType) {
+		if (!myData) return;
 		setCurrentChatID(chat.chatID);
 		setCurrentChatName(myData.friends[chat.uid]);
 		setOpenChatBox(true);
@@ -101,6 +103,8 @@ export default function Sidebar() {
 	useEffect(() => {
 		getChatList();
 	}, []); // eslint-disable-line -- This is definitely only going to be called once
+
+	if (myData === undefined) return <div>Error</div>;
 
 	return (
 		<>
