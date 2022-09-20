@@ -5,12 +5,14 @@ import useAuthStatus from "./useAuthStatus";
 
 export type MyData = {
 	email: string;
-	friends: object;
+	friends: {
+		[uid: string]: string; //uid: email
+	};
 };
 
 type MyDataBeforeLookup = {
 	email: string;
-	friends: string[];
+	friends: string[]; // array of uids
 };
 
 //@ts-ignore
@@ -43,25 +45,31 @@ export function UserContextProvider({ children }) {
 		}
 
 		//get all friend details
-		const promises: Promise<string>[] = [];
 		const friendDetails = {};
-		cachedUidList.current.forEach((uid) => {
-			promises.push(
-				new Promise((resolve) => {
-					const docRef = doc(db, "users", uid);
-					resolve(getDoc(docRef));
-				})
-					//@ts-ignore
-					.then((res) => res.get("email"))
-					.then((email) => (friendDetails[uid] = email))
-					.catch((error) => console.error(error))
-			);
-		});
-		await Promise.all(promises);
+
+		await Promise.all(
+			cachedUidList.current.map(
+				(uid) =>
+					new Promise<void>((resolve, reject) => {
+						const docRef = doc(db, "users", uid);
+						getDoc(docRef)
+							.then((res) => res.get("email"))
+							.then((email) => {
+								friendDetails[uid] = email;
+								resolve();
+							})
+							.catch((error) => {
+								console.error(error);
+								reject();
+							});
+					})
+			)
+		);
 		// change myData.friends from an array of uids to an object containing uid:email pairs
 		setMyData({ ...newData, friends: friendDetails });
 	}
 
+	// subscribe to changes in current user's data
 	useEffect(() => {
 		if (loggedIn) {
 			const ref = doc(db, "users", myID);

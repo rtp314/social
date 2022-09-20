@@ -1,0 +1,79 @@
+const Logo = ()=> {
+return <svg
+width="210mm"
+height="297mm"
+viewBox="0 0 210 297"
+version="1.1"
+id="svg5"
+xmlns="http://www.w3.org/2000/svg"
+xmlns:svg="http://www.w3.org/2000/svg">
+<defs
+  id="defs2">
+ <linearGradient
+    id="linearGradient2994">
+   <stop
+      style="stop-color:#000000;stop-opacity:1;"
+      offset="0"
+      id="stop2992" />
+ </linearGradient>
+</defs>
+<g
+  id="layer2"
+  style="display:none">
+ <path
+    style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+    d="m 109.41166,126.72476 h 86.92247"
+    id="path1915" />
+ <path
+    style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+    d="M 109.41166,126.72476 V 64.076323"
+    id="path1917" />
+ <path
+    style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+    d="m 109.41166,126.72476 v 60.86358"
+    id="path1919" />
+ <ellipse
+    style="opacity:0.541667;fill:#999999;fill-opacity:0;stroke:#000000;stroke-width:0.2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+    id="path1943"
+    cx="109.41166"
+    cy="126.72476"
+    rx="27.744537"
+    ry="26.694742" />
+ <circle
+    style="opacity:0.541667;fill:#999999;fill-opacity:0;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+    id="path2317"
+    cx="109.41166"
+    cy="107.80529"
+    r="18.919472" />
+ <circle
+    style="opacity:0.541667;fill:#999999;fill-opacity:0;stroke:#000000;stroke-width:1;stroke-miterlimit:4.2;stroke-dasharray:none;stroke-opacity:1"
+    id="path2317-7"
+    cx="109.41166"
+    cy="145.64423"
+    r="18.919472" />
+</g>
+<g
+  id="layer1">
+ <circle
+    style="opacity:0.541667;fill:#2996b4;fill-opacity:1;stroke:#000000;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+    id="path846"
+    cx="108.51923"
+    cy="127.08173"
+    r="69.966347" />
+ <path
+    style="fill:none;stroke:#ffffff;stroke-width:10;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+    d="m 109.41166,88.70733 c -29.271635,0 -26.772833,38.01743 0,38.01743 26.77283,0 29.09315,37.83894 0,37.83894"
+    id="path3386" />
+ <path
+    style="fill:none;stroke:#ffffff;stroke-width:10;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+    d="m 109.41166,88.707329 h 72.32838"
+    id="path8029" />
+ <path
+    style="fill:none;stroke:#ffffff;stroke-width:10;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+    d="M 109.41166,164.5637 H 36.726632"
+    id="path8163" />
+</g>
+</svg>
+}
+
+export default Logo

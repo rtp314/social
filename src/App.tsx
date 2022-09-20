@@ -1,9 +1,10 @@
 import React from "react";
 import Entry from "./components/Entry";
-import Posts from "./components/Posts/Posts";
-import Sidebar from "./components/Sidebar";
-import Writer from "./components/Posts/Writer";
 import useAuthStatus from "./libs/useAuthStatus";
+
+const Writer = React.lazy(() => import("./components/Posts/Writer"));
+const Posts = React.lazy(() => import("./components/Posts/Posts"));
+const Sidebar = React.lazy(() => import("./components/Sidebar"));
 
 function App() {
 	const { loggedIn } = useAuthStatus();

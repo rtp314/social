@@ -11,23 +11,20 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import User from "./pages/User";
-import { UserContextProvider } from "./libs/UserContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
 root.render(
 	<React.StrictMode>
-		<UserContextProvider>
-			<BrowserRouter>
-				<Routes>
-					<Route path='/' element={<Navbar />}>
-						<Route index element={<App />} />
-						<Route path='login' element={<Login />} />
-						<Route path='signup' element={<Signup />} />
-						<Route path='user' element={<User />} />
-					</Route>
-				</Routes>
-			</BrowserRouter>
-		</UserContextProvider>
+		<BrowserRouter>
+			<Routes>
+				<Route path='/' element={<Navbar />}>
+					<Route index element={<App />} />
+					<Route path='login' element={<Login />} />
+					<Route path='signup' element={<Signup />} />
+					<Route path='user' element={<User />} />
+				</Route>
+			</Routes>
+		</BrowserRouter>
 	</React.StrictMode>
 );

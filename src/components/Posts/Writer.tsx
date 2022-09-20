@@ -14,7 +14,6 @@ export default function Writer() {
 	const [newPost, setNewPost] = useState("");
 	const [images, setImages] = useState<ImageFile[]>([]);
 	const fileUpload = useRef<HTMLInputElement>(null);
-	const input = useRef<HTMLInputElement>(null);
 
 	async function handleNewPost() {
 		if (!auth.currentUser) return;
@@ -27,7 +26,6 @@ export default function Writer() {
 					const storageRef = ref(storage, `${auth.currentUser!.uid}/${imageElement.name}`);
 					await uploadBytes(storageRef, imageElement.raw);
 					const url = await getDownloadURL(storageRef);
-					console.log(url);
 					uploadedImagesUrls.push(url);
 				} catch (error) {
 					console.error(error);
@@ -37,16 +35,18 @@ export default function Writer() {
 		}
 		//second, upload post
 		if (!errored) {
-			const msg = newPost;
-			setNewPost("");
-			console.log(uploadedImagesUrls);
-			await addDoc(collection(db, "posts"), {
-				uid: auth.currentUser.uid,
-				body: msg,
-				date: Timestamp.now(),
-				images: uploadedImagesUrls,
-			});
-			setImages([]);
+			try {
+				await addDoc(collection(db, "posts"), {
+					uid: auth.currentUser.uid,
+					body: newPost,
+					date: Timestamp.now(),
+					images: uploadedImagesUrls,
+				});
+				setNewPost("");
+				setImages([]);
+			} catch (error) {
+				console.error(error);
+			}
 		}
 	}
 
@@ -89,6 +89,7 @@ export default function Writer() {
 		<div id='post-writer' onDragOver={handleDragOver} onDrop={handleDrop} className='writer post'>
 			{images.map((uploadedImage, index) => (
 				<UploadedImage
+					key={index}
 					imgSrc={uploadedImage.data}
 					imgName={uploadedImage.name}
 					deleteImage={deleteUploadedImage}
@@ -96,7 +97,6 @@ export default function Writer() {
 			))}
 			<input
 				type='text'
-				ref={input}
 				value={newPost}
 				onChange={(e) => setNewPost(e.target.value)}
 				className='input'

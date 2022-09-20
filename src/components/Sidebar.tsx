@@ -1,9 +1,9 @@
 import { doc, collection, setDoc, query, getDocs } from "firebase/firestore";
-import React, { useContext, useEffect, useRef, useState } from "react";
-import { auth, db } from "../libs/firebase_config";
-import { UserContext } from "../libs/UserContext";
+import React, { useEffect, useRef, useState } from "react";
+import { db } from "../libs/firebase_config";
 import { useTimeout } from "../libs/utilityHooks";
 import Chat from "./Chat/Chat";
+import { myUid, myData } from "../libs/useUserData";
 //@ts-ignore
 import messageIcon from "/images/message-svgrepo-com.svg";
 
@@ -13,20 +13,18 @@ type ChatType = {
 };
 
 export default function Sidebar() {
-	const myID = auth.currentUser?.uid || "";
 	const [openChatBox, setOpenChatBox] = useState(false);
 	const [openChatList, setOpenChatList] = useState(false);
 	const { timeout } = useTimeout();
 	const [chats, setChats] = useState<ChatType[]>([]);
 	const [currentChatID, setCurrentChatID] = useState("");
 	const [currentChatName, setCurrentChatName] = useState("");
-	const myData = useContext(UserContext);
 	const friendsModal = useRef<HTMLDialogElement | null>(null);
 	const circle = useRef<HTMLDivElement | null>(null);
 
 	async function getChatList() {
 		//get the chat list
-		const q = query(collection(db, "users", myID, "chats"));
+		const q = query(collection(db, "users", myUid, "chats"));
 		const chatData = await getDocs(q);
 		let chatList: ChatType[] = [];
 
@@ -55,13 +53,13 @@ export default function Sidebar() {
 			const newChatID = doc(collection(db, "chats")).id;
 
 			//add a new document to the "chats" collection of both users in chat
-			await setDoc(doc(db, "users", myID, "chats", uid), {
+			await setDoc(doc(db, "users", myUid, "chats", uid), {
 				chat_id: newChatID,
-				users: [myID, uid],
+				users: [myUid, uid],
 			});
-			await setDoc(doc(db, "users", uid, "chats", myID), {
+			await setDoc(doc(db, "users", uid, "chats", myUid), {
 				chat_id: newChatID,
-				users: [myID, uid],
+				users: [myUid, uid],
 			});
 
 			setCurrentChatID(newChatID);
