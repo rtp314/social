@@ -1,11 +1,12 @@
-import { collection, DocumentData, limit, onSnapshot, orderBy, query } from "firebase/firestore";
+import { limit, onSnapshot, orderBy, query } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { db } from "../../libs/firebase_config";
+import { postsCollection } from "../../libs/firebase_config";
+import { PostWithId } from "../../libs/types";
 import Post from "./Post";
 import PostSkeleton from "./Post-Skeleton";
 
 export default function Posts() {
-	const [postsArray, setPostsArray] = useState<DocumentData[]>([]);
+	const [postsArray, setPostsArray] = useState<PostWithId[]>([]);
 	// const [now, setNow] = useState<Date>(new Date());
 
 	// useEffect(() => {
@@ -14,13 +15,13 @@ export default function Posts() {
 	// }, []);
 
 	useEffect(() => {
-		const q = query(collection(db, "posts"), orderBy("date", "desc"), limit(10));
+		const q = query(postsCollection, orderBy("date", "desc"), limit(10));
 
 		const unsubscribe = onSnapshot(q, (snapshot) => {
 			const update = snapshot
 				.docChanges()
 				.filter((change) => change.type === "added")
-				.map((change) => change.doc.data());
+				.map((change) => ({ ...change.doc.data(), id: change.doc.id }));
 			setPostsArray((prev) => [...update, ...prev]);
 		});
 

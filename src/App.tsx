@@ -4,7 +4,7 @@ import useAuthStatus from "./libs/useAuthStatus";
 
 const Writer = React.lazy(() => import("./components/Posts/Writer"));
 const Posts = React.lazy(() => import("./components/Posts/Posts"));
-const Sidebar = React.lazy(() => import("./components/Sidebar"));
+const Sidebar = React.lazy(() => import("./components/Chat/Sidebar"));
 
 function App() {
 	const { loggedIn } = useAuthStatus();

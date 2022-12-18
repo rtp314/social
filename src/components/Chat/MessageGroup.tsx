@@ -11,8 +11,8 @@ export default function MessageGroup({ msgGroup, user }: MessageGroupProps) {
 	return (
 		<div className='messagegroup'>
 			<span className='timestamp'>{msgGroup[0].day}</span>
-			{msgGroup.map((msg) => {
-				return <ChatMessage msg={msg} user={user} />;
+			{msgGroup.map((msg, index) => {
+				return <ChatMessage key={index} msg={msg} user={user} />;
 			})}
 		</div>
 	);

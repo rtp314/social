@@ -1,9 +1,9 @@
 import { doc, collection, setDoc, query, getDocs } from "firebase/firestore";
 import React, { useEffect, useRef, useState } from "react";
-import { db } from "../libs/firebase_config";
-import { useTimeout } from "../libs/utilityHooks";
-import Chat from "./Chat/Chat";
-import { myData, myUid } from "../libs/currentUserData";
+import { db } from "../../libs/firebase_config";
+import { useTimeout } from "../../libs/utilityHooks";
+import Chat from "./Chat";
+import useMyData, { myUid } from "../../libs/currentUserData";
 //@ts-ignore
 import messageIcon from "/images/message-svgrepo-com.svg";
 
@@ -15,10 +15,14 @@ type ChatType = {
 export default function Sidebar() {
 	const [openChatBox, setOpenChatBox] = useState(false);
 	const [openChatList, setOpenChatList] = useState(false);
-	const { timeout } = useTimeout();
 	const [chats, setChats] = useState<ChatType[]>([]);
-	const [currentChatID, setCurrentChatID] = useState("");
-	const [currentChatName, setCurrentChatName] = useState("");
+	const currentChatID = useRef("");
+	const currentChatName = useRef("");
+	const [uselessState, setUselessState] = useState(true);
+
+	const { timeout } = useTimeout();
+	const myData = useMyData();
+
 	const friendsModal = useRef<HTMLDialogElement | null>(null);
 	const circle = useRef<HTMLDivElement | null>(null);
 
@@ -44,8 +48,8 @@ export default function Sidebar() {
 		const test = chats.find((chat) => chat.uid === uid);
 
 		if (test !== undefined) {
-			setCurrentChatID(test.chatID);
-			setCurrentChatName(myData.friends[uid]);
+			currentChatID.current = test.chatID;
+			currentChatName.current = myData.friends[uid];
 			setOpenChatBox(true);
 		} else {
 			console.log("creating new chat document");
@@ -62,17 +66,17 @@ export default function Sidebar() {
 				users: [myUid, uid],
 			});
 
-			setCurrentChatID(newChatID);
+			currentChatID.current = newChatID;
 			setChats((prev) => [...prev, { uid: uid, chatID: newChatID }]);
-			setCurrentChatName(myData.friends[uid]);
+			currentChatName.current = myData.friends[uid];
 			setOpenChatBox(true);
 		}
 	}
 
 	function openOldChat(chat: ChatType) {
 		if (!myData) return;
-		setCurrentChatID(chat.chatID);
-		setCurrentChatName(myData.friends[chat.uid]);
+		currentChatID.current = chat.chatID;
+		currentChatName.current = myData.friends[chat.uid];
 		setOpenChatBox(true);
 	}
 
@@ -98,16 +102,26 @@ export default function Sidebar() {
 		}
 	}
 
-	useEffect(() => {
-		setCurrentChatID((prev) => prev);
-	}, [myData]);
+	// useEffect(() => {
+	// 	console.log("myData changed");
+	// 	setLoadedData(myData);
+	// 	console.log(myData);
+	// }, [myData]);
+
+	useEffect(() => console.log("rerendering"));
 
 	useEffect(() => {
 		getChatList();
 	}, []); // eslint-disable-line -- This is definitely only going to be called once
 
 	if (myData === undefined) {
-		return <div>Error</div>;
+		return (
+			<div>
+				Error
+				<br />
+				<button onClick={() => setUselessState((prev) => !prev)}>Retry</button>
+			</div>
+		);
 	}
 
 	return (
@@ -152,7 +166,13 @@ export default function Sidebar() {
 					</>
 				)}
 			</div>
-			{openChatBox && <Chat chatID={currentChatID} chatName={currentChatName} setOpenChatBox={setOpenChatBox} />}
+			{openChatBox && (
+				<Chat
+					chatID={currentChatID.current}
+					chatName={currentChatName.current}
+					setOpenChatBox={setOpenChatBox}
+				/>
+			)}
 		</>
 	);
 }

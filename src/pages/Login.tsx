@@ -66,8 +66,8 @@ export default function Login() {
 			</div>
 			<div className='saved-users'>
 				<p>Saved Accounts</p>
-				{savedUsers.map((user) => (
-					<SavedUser user={user} />
+				{savedUsers.map((user, i) => (
+					<SavedUser key={i} user={user} />
 				))}
 			</div>
 		</div>
