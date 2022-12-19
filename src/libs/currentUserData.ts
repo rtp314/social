@@ -1,14 +1,8 @@
 import { onAuthStateChanged, Unsubscribe } from "firebase/auth";
 import { getDoc, doc, onSnapshot, DocumentSnapshot, collection } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { setUserData } from "../stores/userData";
 import { db, auth } from "./firebase_config";
-
-export type MyData = {
-	email: string;
-	friends: {
-		[uid: string]: string; //uid: email
-	};
-};
+import { MyData } from "./types";
 
 type MyDataBeforeLookup = {
 	email: string;
@@ -18,8 +12,7 @@ type MyDataBeforeLookup = {
 let unsubscribeFromUserData: Unsubscribe;
 let myUid: string;
 let myData: MyData;
-let myFriendsUids: string[] = [];
-let updateFunctions: ((update: MyData) => void)[] = [];
+let myFriendsUids: string[] = []; 
 
 onAuthStateChanged(auth, (user) => {
 	console.log("auth state changed");
@@ -79,19 +72,7 @@ async function handleSnapshot(snapshot: DocumentSnapshot) {
 		console.error(error);
 	}
 	myData = { ...newData, friends: friendDetails };
-	updateFunctions.forEach((fn) => fn(myData));
-	console.log(myData);
+  setUserData(myData)
 }
 
-export default function useMyData() {
-	const [state, setState] = useState(myData);
-
-	useEffect(() => {
-		setState(myData);
-		updateFunctions.push(setState);
-	}, [myData]);
-
-	return state;
-}
-
-export { myData, myUid };
+export { myUid };

@@ -10,3 +10,10 @@ export type Post = {
 export type PostWithId = Post & {
 	id: string;
 };
+
+export type MyData = {
+	email: string;
+	friends: {
+		[uid: string]: string; //uid: email
+	};
+};
