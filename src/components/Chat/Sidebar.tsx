@@ -1,5 +1,5 @@
 import { doc, collection, setDoc, query, getDocs } from "firebase/firestore";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { db } from "../../libs/firebase_config";
 import { useTimeout } from "../../libs/utilityHooks";
 import Chat from "./Chat";
