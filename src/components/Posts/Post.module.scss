@@ -1,26 +1,27 @@
 .delete_menu {
-	position: relative;
-	isolation: isolate;
+  position: relative;
+  isolation: isolate;
 }
 
 .delete {
-	background-color: white;
-	position: absolute;
-	padding: 0.5rem;
-	right: 0;
-	top: 0;
-	overflow: hidden;
+  background-color: white;
+  position: absolute;
+  padding: 0.5rem;
+  right: 0;
+  top: 0;
+  overflow: hidden;
 
-	div {
-		position: absolute;
-		background: red;
-		color: white;
-		inset: 0;
-		transform: translateX(-110%);
-		transition: transform 200ms;
-	}
+  div {
+    position: absolute;
+    background: red;
+    color: white;
+    inset: 0;
+    transform: translateX(-110%);
+    transition: transform 200ms;
+    z-index: 2;
+  }
 
-	div.show_delete {
-		transform: translateX(0%);
-	}
+  div.show_delete {
+    transform: translateX(0%);
+  }
 }

@@ -1,20 +1,24 @@
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
-export default function useClickOutside(ref: Node, callback: () => any) {
-	function handleClick(event: Event) {
-		if (event.currentTarget !== ref) {
-			callback();
-		}
-	}
+export default function useClickOutside(ref: Node | null, callback: () => any) {
+  function handleClick(event: Event) {
+    if (ref && !ref.contains(event.target as Node)) {
+      unsubscribe();
+      callback();
+    }
+  }
 
-	function unsubscribe() {
-		window.removeEventListener("click", handleClick);
-	}
+  function activateClickAwayListener() {
+    if (ref) window.addEventListener('click', handleClick);
+  }
 
-	useEffect(() => {
-		window.addEventListener("click", handleClick, { once: true });
-		return unsubscribe;
-	}, []);
+  function unsubscribe() {
+    window.removeEventListener('click', handleClick);
+  }
 
-	return unsubscribe;
+  useEffect(() => {
+    return unsubscribe;
+  }, []);
+
+  return { unsubscribe, activateClickAwayListener };
 }

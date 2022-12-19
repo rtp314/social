@@ -109,7 +109,7 @@ export default function Sidebar() {
 	// 	console.log(myData);
 	// }, [myData]);
 
-	useEffect(() => console.log("rerendering"));
+	// useEffect(() => console.log("rerendering"));
 
 	useEffect(() => {
 		getChatList();
