@@ -5,7 +5,7 @@ import { useTimeout } from "../../libs/utilityHooks";
 import Chat from "./Chat";
 import useMyData, { myUid } from "../../libs/currentUserData";
 //@ts-ignore
-import messageIcon from "/images/message-svgrepo-com.svg";
+import messageIcon from "../../images/message-svgrepo-com.svg";
 
 type ChatType = {
 	uid: string;

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 //@ts-ignore
-import logo from "/images/logo3.svg";
+import logo from "../images/logo3.svg";
 
 export default function Entry() {
 	return (

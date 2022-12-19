@@ -3,9 +3,9 @@ import useAuthStatus from "../libs/useAuthStatus";
 import { signOut } from "firebase/auth";
 import { auth } from "../libs/firebase_config";
 //@ts-ignore
-import logo from "/images/logo3.svg";
+import logo from "../images/logo3.svg";
 //@ts-ignore
-import gear from "/images/gear-svgrepo-com.svg";
+import gear from "../images/gear-svgrepo-com.svg";
 import { Link, Outlet } from "react-router-dom";
 
 export default function Navbar() {

@@ -3,7 +3,7 @@ import { getTimestamp } from "../../libs/utils";
 import useAuthStatus from "../../libs/useAuthStatus";
 import { PostWithId } from "../../libs/types";
 //@ts-ignore
-import dots from "../../../public/images/dots.svg";
+import dots from "../../images/dots.svg";
 import useMyData from "../../libs/currentUserData";
 //@ts-ignore
 import styles from "./Post.module.scss";
