@@ -4,15 +4,16 @@ import useAuthStatus from "../../libs/useAuthStatus";
 import { PostWithId } from "../../libs/types";
 //@ts-ignore
 import dots from "../../images/dots.svg";
-import { myData } from "../../stores/userData";
 //@ts-ignore
 import styles from "./Post.module.scss";
+import userDataStore from "../../stores/userData";
 
 interface Props {
 	post: PostWithId;
 }
 
 export default function Post({ post }: Props) {
+  const myData = userDataStore(state => state.userData)
 	const timestamp = getTimestamp(post.date);
 	const { myID } = useAuthStatus();
 

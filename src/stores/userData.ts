@@ -1,4 +1,4 @@
-import create from "zustand/react";
+import create from "zustand";
 import { MyData } from "../libs/types";
 
 interface UserDataState {
@@ -11,6 +11,4 @@ const userDataStore = create<UserDataState>()( set => ({
   setUserData: (newUserData: MyData) => set(() => ({userData: newUserData}))
 }))
 
-export const myData = userDataStore(state => state.userData)
-
-export const setUserData = userDataStore(state => state.setUserData)
+export default userDataStore

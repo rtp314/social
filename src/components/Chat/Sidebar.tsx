@@ -3,9 +3,10 @@ import { useEffect, useRef, useState } from "react";
 import { db } from "../../libs/firebase_config";
 import { useTimeout } from "../../libs/utilityHooks";
 import Chat from "./Chat";
-import useMyData, { myUid } from "../../libs/currentUserData";
+import { myUid } from "../../libs/currentUserData";
 //@ts-ignore
 import messageIcon from "../../images/message-svgrepo-com.svg";
+import userDataStore from "../../stores/userData";
 
 type ChatType = {
 	uid: string;
@@ -21,7 +22,7 @@ export default function Sidebar() {
 	const [uselessState, setUselessState] = useState(true);
 
 	const { timeout } = useTimeout();
-	const myData = useMyData();
+	const myData = userDataStore(state => state.userData);
 
 	const friendsModal = useRef<HTMLDialogElement | null>(null);
 	const circle = useRef<HTMLDivElement | null>(null);
@@ -114,7 +115,7 @@ export default function Sidebar() {
 		getChatList();
 	}, []); // eslint-disable-line -- This is definitely only going to be called once
 
-	if (myData === undefined) {
+	if (!myData) {
 		return (
 			<div>
 				Error

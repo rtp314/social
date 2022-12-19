@@ -1,6 +1,6 @@
 import { onAuthStateChanged, Unsubscribe } from "firebase/auth";
 import { getDoc, doc, onSnapshot, DocumentSnapshot, collection } from "firebase/firestore";
-import { setUserData } from "../stores/userData";
+import userDataStore from "../stores/userData";
 import { db, auth } from "./firebase_config";
 import { MyData } from "./types";
 
@@ -8,6 +8,8 @@ type MyDataBeforeLookup = {
 	email: string;
 	friends: string[]; // array of uids
 };
+
+const setUserData = userDataStore.getState().setUserData
 
 let unsubscribeFromUserData: Unsubscribe;
 let myUid: string;
