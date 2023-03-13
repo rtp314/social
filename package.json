@@ -1,5 +1,6 @@
 {
 	"name": "social",
+  "homepage": "https://rtp314.github.io/social/",
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {

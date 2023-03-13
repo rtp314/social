@@ -17,7 +17,7 @@ const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)
 
 root.render(
 	<React.StrictMode>
-		<BrowserRouter>
+		<BrowserRouter basename="/social">
 			<Routes>
 				<Route path='/' element={<Navbar />}>
 					<Route index element={<App />} />
